@@ -5,7 +5,10 @@ const Platform = require("./Platform");
 User.belongsToMany(Streamer, { through: "User_Streamer" });
 Streamer.belongsToMany(User, { through: "User_Streamer" });
 
-Platform.belongsTo(Streamer, {
+Streamer.belongsTo(Platform, {
+  foreignKey: "platform_id",
+});
+Platform.hasMany(Streamer, {
   foreignKey: "platform_id",
 });
 
