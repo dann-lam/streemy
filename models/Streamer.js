@@ -12,14 +12,14 @@ Streamer.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_ID: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      references: {
-        model: "user",
-        key: "id",
-      },
-    },
+    // user_ID: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   references: {
+    //     model: "user",
+    //     key: "id",
+    //   },
+    // },
     streamer_url: {
       type: DataTypes.STRING,
       allowNull: false,
