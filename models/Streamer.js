@@ -12,17 +12,29 @@ Streamer.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    streamer_ID: {
-      type: DataTypes.INTEGER,
+    user_ID: {
+      type: DataTypes.STRING,
       allowNull: true,
+      references: {
+        model: "user",
+        key: "id",
+      },
     },
-    platform_ID: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
+    streamer_url: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    online: {
+    stream_online: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    platform_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "platform",
+        key: "id",
+      },
     },
   },
   {

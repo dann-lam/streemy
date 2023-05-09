@@ -38,6 +38,11 @@ User.init(
         len: [8],
       },
     },
+    twitch_ID: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    //used specifically for updating our profile to receive a TWITCH STRING.
   },
   {
     hooks: {

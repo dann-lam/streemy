@@ -11,35 +11,13 @@ Platform.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "user",
-        key: "id",
-      },
-    },
-    post_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "post",
-        key: "id",
-      },
-    },
-    comment_content: {
-      type: DataTypes.TEXT,
+    platform_name: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    // date_created: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false,
-    //   defaultValue: DataTypes.NOW,
-    // },
   },
   {
     sequelize,
-    timestamps: true,
-    createdAt: true,
-    updatedAt: true,
     freezeTableName: true,
     underscored: true,
     modelName: "platform",
