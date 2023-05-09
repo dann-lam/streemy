@@ -12,6 +12,10 @@ Streamer.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     // user_ID: {
     //   type: DataTypes.STRING,
     //   allowNull: true,
