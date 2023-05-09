@@ -20,4 +20,14 @@ const tiktokStreams = [
     },
   ];
   
+  const twitchStreams = [
+    {
+      profileImage: "https://www.bing.com/th?id=OIP.s_D2gr9AQVsv5oCCIWSA1wHaHZ&w=206&h=206&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+      title: "Pokimane",
+    },
+    {
+      profileImage: "https://www.bing.com/th?id=OIP.s_D2gr9AQVsv5oCCIWSA1wHaHZ&w=206&h=206&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+      title: "xQc",
+    },
+  ];
   
