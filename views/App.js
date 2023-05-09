@@ -31,3 +31,22 @@ const tiktokStreams = [
     },
   ];
   
+  function displayStreams(streams, containerId) {
+    const container = document.getElementById(containerId);
+  
+    streams.forEach((stream) => {
+      const streamDiv = document.createElement("div");
+      streamDiv.className = "stream";
+  
+      const img = document.createElement("img");
+      img.src = stream.profileImage;
+      img.alt = stream.title;
+      streamDiv.appendChild(img);
+  
+      const p = document.createElement("p");
+      p.textContent = stream.title;
+      streamDiv.appendChild(p);
+  
+      container.appendChild(streamDiv);
+    });
+  }
