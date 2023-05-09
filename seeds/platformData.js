@@ -18,6 +18,6 @@ const platformData = [
   },
 ];
 
-const seedPlatforms = () => Platform.bulkCreate(platformData);
+const seedPlatform = () => Platform.bulkCreate(platformData);
 
-module.exports = seedPlatforms;
+module.exports = seedPlatform;

@@ -3,13 +3,13 @@ const sequelize = require("../config/connection");
 
 class User_Streamer extends Model {}
 
-UserStreamer.init(
+User_Streamer.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
+    
     },
     user: {
       type: DataTypes.INTEGER,
@@ -24,6 +24,10 @@ UserStreamer.init(
         model: "streamer",
         key: "id",
       },
+    },
+    favorited: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   },
   {

@@ -47,9 +47,7 @@ Streamer.init(
   },
   {
     sequelize,
-    timestamps: true,
-    createdAt: true,
-    updatedAt: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: "streamer",
