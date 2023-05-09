@@ -3,11 +3,44 @@ const { User, Streamer, Platform } = require('../models');
 const withAuth = require('../utils/auth');
 const path = require('path');
 
-// Prevent non logged in users from viewing the homepage
-router.get('/', withAuth, async (req, res) => {
+
+router.get('/online', withAuth, async (req, res) => {
     try {
-      const streamerData = await Streamer.findAll();
+        const streamerData = await Streamer.findAll({
+            where: {
+              online: true
+            }
+          });
+      const streamers = streamerData.map((streamer) => streamer.get({ plain: true }));
   
+      res.sendFile(path.join(__dirname, '../public/index.html'));
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+  router.get('/offline', withAuth, async (req, res) => {
+    try {
+        const streamerData = await Streamer.findAll({
+            where: {
+              online: false
+            }
+          });
+      const streamers = streamerData.map((streamer) => streamer.get({ plain: true }));
+  
+      res.sendFile(path.join(__dirname, '../public/index.html'));
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+  router.get('/favorites', withAuth, async (req, res) => {
+    try {
+        const streamerData = await Streamer.findAll({
+            where: {
+              favorite: true
+            }
+          });
       const streamers = streamerData.map((streamer) => streamer.get({ plain: true }));
   
       res.sendFile(path.join(__dirname, '../public/index.html'));
