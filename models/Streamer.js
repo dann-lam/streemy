@@ -24,10 +24,14 @@ Streamer.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    stream_online: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
+
+    //POssibly get rid of this,
+    //Fetch whether the stream is online or not.
+
+    // stream_online: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: false,
+    // },
     platform_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
