@@ -16,26 +16,12 @@ Streamer.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // user_ID: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    //   references: {
-    //     model: "user",
-    //     key: "id",
-    //   },
-    // },
+
     streamer_url: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    //POssibly get rid of this,
-    //Fetch whether the stream is online or not.
-
-    // stream_online: {
-    //   type: DataTypes.BOOLEAN,
-    //   defaultValue: false,
-    // },
     platform_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
