@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS streemy_db;
+
+CREATE DATABASE streemy_db;
