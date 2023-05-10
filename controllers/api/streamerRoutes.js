@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { User, Streamer, Platform } = require("../models");
-const withAuth = require("../utils/auth");
+const { User, Streamer, Platform, User_Streamer } = require("../../models");
+const withAuth = require("../../utils/auth");
 const path = require("path");
 
 router.get("/", async (req, res) => {
@@ -25,20 +25,23 @@ router.get("/online", async (req, res) => {
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
     const streamerData = await User_Streamer.findAll({
+      include
       //Find the streamers where the user ID is OUR user ID.
       //I'm logged in as user ID 2.
       //So, I have to get our USER ID somehow??
       //SESSION ID?
-
       //After we do our SQL Database query where we only get back streamers based on our USER ID
       //We save that query, (because it'll only contain our streamers based on user ID) to a variable.
-
       //Inside that variable is going to be an object of some kind, and we simply respond with a res.json (with our variable inside)
       where: {
-        user: ourUserID,
+        user: 2,
       },
     });
     console.log(ourUserID);
+    if (!streamerData) {
+      console.log("No streamer data found!");
+    }
+    console.log(streamerData);
     res.json(streamerData);
   } catch (err) {
     res.status(500).json(err);
@@ -64,30 +67,17 @@ router.get("/offline", withAuth, async (req, res) => {
 
 router.get("/favorites", withAuth, async (req, res) => {
   try {
-    const streamerData = await Streamer.findAll({
+    const streamerData = await User_Streamer.findAll({
       where: {
         favorite: true,
+        user: req.session.user_id,
       },
     });
-    const streamers = streamerData.map((streamer) =>
-      streamer.get({ plain: true })
-    );
 
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.status(200).json(streamerData);
   } catch (err) {
     res.status(500).json(err);
   }
-});
-
-router.get("/login", (req, res) => {
-  console.log("Hello!");
-  // If a session exists, redirect the request to the homepage
-  if (req.session.logged_in) {
-    res.redirect("/online");
-    return;
-  }
-
-  res.sendFile(path.join(__dirname, "../views/login.html"));
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Platform, Streamer, User_Streamer } = require("../../models");
 const { update } = require("../../models/User");
 
 router.post("/signup", async (req, res) => {
