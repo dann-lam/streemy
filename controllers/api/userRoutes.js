@@ -4,6 +4,7 @@ const { update } = require("../../models/User");
 
 router.post("/signup", async (req, res) => {
   try {
+    console.log("Is our signup route getting hit??");
     // Find the user who matches the posted e-mail address
     //Get the username.
     let passwordInput = req.body.password;
@@ -26,6 +27,7 @@ router.post("/signup", async (req, res) => {
         req.session.logged_in = true;
 
         // Redirect to index.html upon successful signup
+        console.log(req.session.user_id);
         res.redirect("/index.html");
       });
     }
@@ -54,7 +56,7 @@ router.post("/login", async (req, res) => {
   try {
     // Find the user who matches the posted e-mail address
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    console.log("Hi!!!! Post log in route hit!!!");
     if (!userData) {
       res
         .status(400)

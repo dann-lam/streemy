@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -63,5 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       // Display an error message (e.g., email already exists)
     }
+
   });
 });
