@@ -25,7 +25,7 @@ router.get("/online", async (req, res) => {
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
     const streamerData = await User_Streamer.findAll({
-      include
+      // include
       //Find the streamers where the user ID is OUR user ID.
       //I'm logged in as user ID 2.
       //So, I have to get our USER ID somehow??
