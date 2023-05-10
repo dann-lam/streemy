@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User, Platform, Streamer, User_Streamer } = require("../../models");
 const { update } = require("../../models/User");
+const path = require("path");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -52,8 +53,28 @@ router.post("/", async (req, res) => {
   }
 });
 
+// router.get("/login", async (req, res) => {
+//   try {
+//     res.status(200).json();
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+
+router.get("/login", (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  if (!req.session.logged_in) {
+    console.log(__dirname);
+    return res.sendFile(path.join(__dirname, "../../views/login.html"));
+  } else {
+    console.log("Hi!");
+    // res.redirect("/online");
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body);
     // Find the user who matches the posted e-mail address
     const userData = await User.findOne({ where: { email: req.body.email } });
     console.log("Hi!!!! Post log in route hit!!!");

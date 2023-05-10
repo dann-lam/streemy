@@ -34,7 +34,7 @@ router.get("/online", async (req, res) => {
       //We save that query, (because it'll only contain our streamers based on user ID) to a variable.
       //Inside that variable is going to be an object of some kind, and we simply respond with a res.json (with our variable inside)
       where: {
-        user: 2,
+        user: ourUserID,
       },
     });
     console.log(ourUserID);
