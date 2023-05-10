@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { User, Streamer, Platform, User_Streamer } = require("../../models");
-const withAuth = require("../../utils/auth");
+const { User, Streamer, Platform, User_Streamer } = require("../models");
+const withAuth = require("../utils/auth");
 const path = require("path");
 
 router.get("/", async (req, res) => {
