@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
   <link rel="stylesheet" type="text/css" href="css/login.css">
-
-
 </head>
 
 <body>
-    <div class="form-container">
-    <h2>Login</h2>
-  <form action="login.php" method="post">
-    <div>
-      <label for="email">Email:</label>
-      <input type="text" id="email" name="email" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-      <input type="submit" value="Login">
-    </div>
-  </form>
-</div>
+  <div class="container">
 
+    <button id="show-login-btn">Already have an account? Login</button>
 
-    <script src="js/login.js"></script>
+    <form id="login-form" class="form">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Login">
+      </div>
+    </form>
+
+    <button id="show-signup-btn">Sign Up</button>
+
+    <form id="signup-form" class="form">
+        <div class="form-group">
+            <label for="signup-email">Email:</label>
+            <input type="text" id="signup-email" name="signup-email" required>
+        </div>
+        <div class="form-group">
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" name="signup-password" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Sign Up">
+        </div>
+    </form>
+  </div>
+
+  <script src="js/login.js"></script>
 </body>
+
 </html>
