@@ -81,7 +81,7 @@ document.querySelector('.favorites-button').addEventListener('click', () => {
 
 document.querySelector('.status-button.online').addEventListener('click', () => {
   // Fetch data for online streamers and populate the cards
-  fetch('/online')
+  fetch('/api/online')
     .then(response => response.json())
     .then(data => {
       data.forEach(user => addUserCard(user));
