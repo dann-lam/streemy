@@ -37,24 +37,6 @@ const userData = [
       password: 'password123',
       twitch_ID: null,
     },
-    {
-      username: 'user7',
-      email: 'user7@example.com',
-      password: 'password123',
-      twitch_ID: null,
-    },
-    {
-      username: 'user8',
-      email: 'user8@example.com',
-      password: 'password123',
-      twitch_ID: null,
-    },
-    {
-      username: 'user9',
-      email: 'user9@example.com',
-      password: 'password123',
-      twitch_ID: null,
-    },
   ];
 
 

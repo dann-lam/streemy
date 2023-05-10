@@ -17,6 +17,7 @@ User_Streamer.init(
         model: "user",
         key: "id",
       },
+      field: "user",
     },
     streamer: {
       type: DataTypes.INTEGER,
@@ -24,6 +25,7 @@ User_Streamer.init(
         model: "streamer",
         key: "id",
       },
+      field: "streamer"
     },
     favorited: {
       type: DataTypes.BOOLEAN,

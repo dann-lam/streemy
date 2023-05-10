@@ -7,27 +7,43 @@ const user_streamerData = [
   },
   {
     user: 1,
-    streamer: 2,
-  },
-  {
-    user: 1,
     streamer: 3,
-  },
-  {
-    user: 1,
-    streamer: 4,
   },
   {
     user: 1,
     streamer: 5,
   },
   {
+    user: 1,
+    streamer: 7,
+  },
+  {
+    user: 1,
+    streamer: 9,
+  },
+  {
     user: 2,
     streamer: 1,
   },
   {
     user: 2,
     streamer: 2,
+  },
+  {
+    user: 2,
+    streamer: 4,
+  },
+  {
+    user: 2,
+    streamer: 8,
+  },
+  {
+    user: 3,
+    streamer: 2,
+  },
+  {
+    user: 3,
+    streamer: 3,
   },
   {
     user: 3,
@@ -35,51 +51,23 @@ const user_streamerData = [
   },
   {
     user: 3,
-    streamer: 1,
+    streamer: 6,
   },
   {
-    user: 5,
-    streamer: 2,
-  },
-  {
-    user: 5,
+    user: 4,
     streamer: 3,
   },
   {
-    user: 5,
+    user: 4,
     streamer: 4,
   },
   {
-    user: 1,
-    streamer: 1,
+    user: 4,
+    streamer: 6,
   },
   {
-    user: 1,
-    streamer: 2,
-  },
-  {
-    user: 1,
-    streamer: 3,
-  },
-  {
-    user: 1,
-    streamer: 4,
-  },
-  {
-    user: 1,
-    streamer: 5,
-  },
-  {
-    user: 2,
-    streamer: 1,
-  },
-  {
-    user: 2,
-    streamer: 2,
-  },
-  {
-    user: 3,
-    streamer: 4,
+    user: 4,
+    streamer: 8,
   },
   {
     user: 5,
@@ -91,11 +79,23 @@ const user_streamerData = [
   },
   {
     user: 5,
-    streamer: 3,
+    streamer: 4,
   },
   {
     user: 5,
+    streamer: 9,
+  },
+  {
+    user: 6,
     streamer: 4,
+  },
+  {
+    user: 6,
+    streamer: 6,
+  },
+  {
+    user: 6,
+    streamer: 8,
   },
 ];
 
