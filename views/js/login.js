@@ -25,4 +25,3 @@ document.addEventListener("DOMContentLoaded", function() {
       emailInput.setCustomValidity("");
     }
   });
-  
