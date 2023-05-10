@@ -1,21 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const showLoginFormButton = document.getElementById("show-login-btn");
   const loginForm = document.getElementById("login-form");
   const showSignupFormButton = document.getElementById("show-signup-btn");
   const signupForm = document.getElementById("signup-form");
   const emailInput = document.getElementById("email");
 
-  showLoginFormButton.addEventListener("click", function() {
+  showLoginFormButton.addEventListener("click", function () {
     loginForm.style.display = "block";
     signupForm.style.display = "none";
   });
 
-  showSignupFormButton.addEventListener("click", function() {
+  showSignupFormButton.addEventListener("click", function () {
     signupForm.style.display = "block";
     loginForm.style.display = "none";
   });
 
-  emailInput.addEventListener("input", function() {
+  emailInput.addEventListener("input", function () {
     if (!emailInput.checkValidity()) {
       emailInput.setCustomValidity("Please enter a valid email address.");
     } else {
@@ -23,17 +23,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  loginForm.addEventListener("submit", async function(e) {
+  loginForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("/api/login", {
+    const response = await fetch("/api/user/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
@@ -44,17 +44,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  signupForm.addEventListener("submit", async function(e) {
+  signupForm.addEventListener("submit", async function (e) {
     e.preventDefault();
     const email = document.getElementById("signup-email").value;
     const password = document.getElementById("signup-password").value;
 
-    const response = await fetch("/api/signup", {
+    const response = await fetch("/api/user/signup", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {

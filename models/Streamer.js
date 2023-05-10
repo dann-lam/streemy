@@ -30,6 +30,10 @@ Streamer.init(
         key: "id",
       },
     },
+    is_online: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
