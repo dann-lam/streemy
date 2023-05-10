@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     const showLoginFormButton = document.getElementById("show-login-btn");
     const loginForm = document.getElementById("login-form");
@@ -24,5 +25,3 @@ document.addEventListener("DOMContentLoaded", function() {
       emailInput.setCustomValidity("");
     }
   });
-  
-  
