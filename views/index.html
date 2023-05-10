@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/1pSfxcfJ4S4xctCEtslLynnV5p9bo9n4D5/+2Q" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <title>Streemyy</title>
 </head>
 <body>
     <header>
-        <nav>
-            <!-- Add navigation links here -->
-        </nav>
+        <h1 class="page-title">Streemyy</h1>
+        <div class="dropdown">
+            <button class="dropbtn"> ▼</button>
+            <div class="dropdown-content">
+                <a href="#">Add Platform</a>
+                <a href="#">Profile</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
     </header>
+     <main>
+        <div class="content-wrapper">
+            <section class="favorites-section">
+                <div class="favorites-container">
+                    <button class="favorites-button">Favorites</button>
+                    <button class="status-button online">Online</button>
+                    <button class="status-button offline">Offline</button>
+                </div>
+                <div class="favorites-streamers-container"></div>
+            </section>
+            
+         
 
-    <main>
         <section class="stream-section">
-            <h2>TikTok Streams</h2>
+            <h2></h2>
             <div class="stream-container" id="tiktok-streams">
                 <!-- TikTok streams will be displayed here -->
             </div>
         </section>
 
         <section class="stream-section">
-            <h2>YouTube Streams</h2>
+            <h2></h2>
             <div class="stream-container" id="youtube-streams">
                 <!-- YouTube streams will be displayed here -->
             </div>
         </section>
 
         <section class="stream-section">
-            <h2>Twitch Streams</h2>
+            <h2></h2>
             <div class="stream-container" id="twitch-streams">
                 <!-- Twitch streams will be displayed here -->
             </div>
         </section>
-
+</div>
     </main>
 
     <footer>
         <!-- Add footer content here -->
     </footer>
 
-    <script src="js/App.js"></script>
+    <script src="./App.js"></script>
 </body>
 </html>
