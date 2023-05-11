@@ -4,6 +4,7 @@ const user_streamerData = [
   {
     user_id: 1,
     streamer_id: 1,
+    favorited: true,
   },
   {
     user_id: 1,
@@ -12,14 +13,17 @@ const user_streamerData = [
   {
     user_id: 1,
     streamer_id: 5,
+    favorited: true,
   },
   {
     user_id: 1,
     streamer_id: 7,
+    favorited: false,
   },
   {
     user_id: 1,
     streamer_id: 9,
+    favorited: true,
   },
   {
     user_id: 2,

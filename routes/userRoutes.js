@@ -3,6 +3,7 @@ const { User, Platform, Streamer, User_Streamer } = require("../models");
 const { update } = require("../models/User");
 const path = require("path");
 const withAuth = require("../utils/auth");
+const { Sequelize } = require("sequelize");
 
 router.post("/signup", async (req, res) => {
   try {
@@ -33,28 +34,6 @@ router.post("/signup", async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-// // CREATE new user
-// router.post("/", async (req, res) => {
-//   try {
-//     req.session.save(() => {
-//       req.session.loggedIn = true;
-
-//       res.status(200).json(dbUserData);
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-
-// router.get("/login", async (req, res) => {
-//   try {
-//     res.status(200).json();
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
 
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
@@ -94,39 +73,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.post("/login", async (req, res) => {
-//   try {
-//     // Find the user who matches the posted e-mail address
-//     const userData = await User.findOne({ where: { email: req.body.email } });
-
-//     if (!userData) {
-//       res.status(400).json({ message: "Incorrect email" });
-//       return;
-//     }
-
-//     // Verify the posted password with the password store in the database
-//     const validPassword = await userData.checkPassword(req.body.password);
-
-//     if (!validPassword) {
-//       res.status(400).json({ message: "Incorrect password" });
-//       return;
-//     }
-
-//     // Create session variables based on the logged in user
-//     req.session.save(() => {
-//       req.session.user_id = userData.id;
-//       req.session.logged_in = true;
-
-//       // Redirect to index.html upon successful login
-//       console.log("Res.status(200)");
-//       res.redirect("/index.html");
-//     });
-//   } catch (err) {
-//     console.log("login post 400");
-//     res.status(400).json(err);
-//   }
-// });
-
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     // Remove the session variables
@@ -153,16 +99,6 @@ router.get("/logout", (req, res) => {
 
 /*userRoutes*/
 
-// router.get("/", async (req, res) => {
-//   try {
-//     let yee = await { Message: "We got got." };
-//     res.status(200).json(yee);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-//Deleted withAuth lol
-// withAuth
 router.get("/online", withAuth, async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
@@ -174,6 +110,9 @@ router.get("/online", withAuth, async (req, res) => {
       include: [
         {
           model: Streamer,
+          where: {
+            is_online: true,
+          },
           include: [
             {
               model: Platform,
@@ -204,37 +143,83 @@ router.get("/online", withAuth, async (req, res) => {
 
 router.get("/offline", withAuth, async (req, res) => {
   try {
+    let ourUserID = req.session.user_id;
+    console.log("Our UserID!: ", ourUserID);
     const streamerData = await User.findAll({
       where: {
-        id: ourUserIDm,
+        id: ourUserID,
       },
       include: [
         {
           model: Streamer,
+          where: {
+            is_online: false,
+          },
+          include: [
+            {
+              model: Platform,
+            },
+          ],
         },
       ],
     });
-    const streamers = streamerData.map((streamer) =>
-      streamer.get({ plain: true })
-    );
 
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    if (!streamerData) {
+      console.log("No streamer data found!");
+    }
+    console.log(streamerData);
+    res.status(200).json(streamerData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/favorites", withAuth, async (req, res) => {
+router.patch("/:id", withAuth, async (req, res) => {
+  // const getData = await User_Streamer.findOne(
+
+  //   {
+  //     where: {
+  //       user_id: ourUserID,
+  //       streamer_id: ourTargID,
+  //     },
+  //   }
+  // );
+
   try {
-    const streamerData = await User_Streamer.findAll({
+    let ourTargID = req.params.id;
+    let ourUserID = req.session.user_id;
+    console.log("ourUserID", ourUserID);
+    console.log("ourTargID", ourTargID);
+
+    const updateData = await User_Streamer.update(
+      {
+        favorited: Sequelize.literal("NOT favorited"),
+      },
+      {
+        where: {
+          user_id: ourUserID,
+          streamer_id: ourTargID,
+        },
+        // returning: true,
+        // plain: true,
+      }
+    );
+
+    //Get the boolean value of the target streamer.
+    const boolData = await User_Streamer.findOne({
       where: {
-        favorite: true,
-        user: req.session.user_id,
+        user_id: ourUserID,
+        streamer_id: ourTargID,
       },
     });
 
-    res.status(200).json(streamerData);
+    //Query the thing again, and then send back our thing.
+    console.log(updateData);
+    console.log("UPdate Data:");
+    console.log(boolData);
+    res.status(200).json(boolData);
   } catch (err) {
+    console.log("Hit our error!", err);
     res.status(500).json(err);
   }
 });
