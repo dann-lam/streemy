@@ -10,19 +10,19 @@ const streamerData = [
   {
     name: "Ibai",
     streamer_url: "https://www.twitch.tv/abai",
-    platform_id: 2,
+    platform_id: 1,
     is_online: true,
   },
   {
     name: "PewDiePie",
     streamer_url: "https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw",
-    platform_id: 3,
+    platform_id: 2,
     is_online: true,
   },
   {
     name: "Vegetta777",
     streamer_url: "https://www.youtube.com/@vegetta777/featured",
-    platform_id: 4,
+    platform_id: 2,
     is_online: true,
   },
   {
@@ -34,25 +34,25 @@ const streamerData = [
   {
     name: "Ryda",
     streamer_url: "https://kick.com/ryda",
-    platform_id: 1,
+    platform_id: 5,
     is_online: false,
   },
   {
     name: "Tfue",
     streamer_url: "https://www.twitch.tv/tfue",
-    platform_id: 2,
+    platform_id: 1,
     is_online: true,
   },
   {
     name: "Rubius",
     streamer_url: "https://www.twitch.tv/rubius",
-    platform_id: 3,
+    platform_id: 1,
     is_online: true,
   },
   {
     name: "Pokimane",
     streamer_url: "https://www.twitch.tv/pokimane",
-    platform_id: 4,
+    platform_id: 1,
     is_online: true,
   },
 ];
