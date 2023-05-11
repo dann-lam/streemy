@@ -36,44 +36,18 @@ header {
 
 }
 
-:root {
-  --card-bg-color: grey;
-  --card-padding: 20px;
-  --card-radius: 10px;
-  --card-margin: 30px;
-  --card-width: 250px;
-  --card-shadow-color: rgba(39, 10, 77, 0.2);
-  --card-border-color: aqua;
-  --transition-speed: 0.3s;
-  --hover-scale: 1.05;
-}
-
-@media only screen and (max-width: 600px) {
-  :root {
-    --card-width: 100%;
-    --card-padding: 10px;
-    --card-margin: 15px;
-  }
-}
-
 .card {
   display: flex;
   align-items: center;
-  background-color: var(--card-bg-color);
-  padding: var(--card-padding);
+  background-color: grey;
+  padding: 20px;
   justify-content: space-between;
-  border-radius: var(--card-radius);
-  box-shadow: 0 4px 8px var(--card-shadow-color), 0 0 0 2px var(--card-border-color);
-  transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
-  margin: var(--card-margin);
-  width: var(--card-width);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(39, 10, 77, 0.2), 0 0 0 2px aqua;
+  transition: all 0.3s ease-in-out;
+  margin: 30px;
+  width: 250px;
 }
-
-.card:hover {
-  transform: scale(var(--hover-scale));
-  box-shadow: 0 6px 12px var(--card-shadow-color), 0 0 0 2px var(--card-border-color);
-}
-
 
 .card:hover {
   transform: translateY(-5px);
@@ -142,7 +116,7 @@ header {
 }
 
 .favorites-button {
-  box-shadow: 0 8px 20px rgba(39, 10, 77, 0.2), 0 0 0 2px aqua;
+  box-shadow: 0px 0px 20px #32CD32;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   color: black;
   border: none;
@@ -163,6 +137,7 @@ header {
 
 
 .status-button {
+  box-shadow: 0px 0px 10px #32CD32;
   background-color: black;
   color: white;
 }
@@ -184,6 +159,54 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.logout-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1em;n
+  font-weight: bold;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.platform-twitch {
+  box-shadow: 0 0 5px 8px #6441A5;
+}
+
+.platform-youtube {
+  box-shadow: 0 0 5px 8px #FF0000;
+}
+
+.platform-tiktok {
+  box-shadow: 0 0 5px 8px #000000;
+}
+
+.platform-rumble {
+  box-shadow: 0 0 5px 8px #FF5700;
+}
+
+.platform-kick {
+  box-shadow: 0 0 5px 8px  green;
+}
+
 
 /*login css*/
 
@@ -285,49 +308,3 @@ input[type="submit"]:hover {
   background-color: #4b367c;
 }
 
-.favorite-button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.logout-button {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 1em;n
-  font-weight: bold;
-  padding: 5px 10px;
-  color: #fff;
-  background-color: #000;
-  border: 1px solid #fff;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.logout-button:hover {
-  color: #000;
-  background-color: #fff;
-}
-
-.platform-twitch {
-  box-shadow: 0 0 5px 8px #6441A5;
-}
-
-.platform-youtube {
-  box-shadow: 0 0 5px 8px #FF0000;
-}
-
-.platform-tiktok {
-  box-shadow: 0 0 5px 8px #000000;
-}
-
-.platform-rumble {
-  box-shadow: 0 0 5px 8px #FF5700;
-}
-
-.platform-kick {
-  box-shadow: 0 0 5px 8px #003580;
-}
