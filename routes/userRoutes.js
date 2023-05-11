@@ -147,12 +147,17 @@ router.get("/favorites", withAuth, async (req, res) => {
   try {
     const streamerData = await User_Streamer.findAll({
       where: {
-        favorited: true, 
-        user_id: req.session.user_id, 
+        favorited: true,
+        user_id: req.session.user_id,
       },
       include: [
         {
-          model: Streamer, 
+          model: Streamer,
+          include: [
+            {
+              model: Platform,
+            },
+          ],
         },
       ],
     });

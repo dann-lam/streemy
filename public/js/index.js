@@ -30,6 +30,40 @@ function addUserCard(user) {
   return container.appendChild(cardTemplate);
 }
 
+function addUserCardOffline(user) {
+  const container = document.querySelector(".streamers-container");
+  const card = document.createElement("div");
+  const favoriteButton = document.createElement("button");
+  const nameElement = document.createElement("h3");
+  const platformElement = document.createElement("p");
+  const cardInfo = document.createElement("div");
+  const cardTemplate = document.createElement("div");
+  //Remember to make something for the avatar! :)
+  const streamerURL = user.streamer.streamer_url;
+  const streamerOnline = user.streamer.is_online;
+  nameElement.textContent = user.streamer.name;
+  favoriteButton.innerHTML = user.favorited ? "★" : "☆";
+  platformElement.textContent = user.streamer.platform.platform_name;
+
+  cardTemplate.classList.add("card-template");
+  cardInfo.classList.add("card-info");
+  card.classList.add("card");
+  favoriteButton.classList.add("favorite-button");
+  nameElement.classList.add("card-username");
+  platformElement.classList.add("card-platform");
+  card.classList.add(
+    `platform-${user.streamer.platform.platform_name.toLowerCase()}`
+  );
+
+  cardTemplate.appendChild(card);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(nameElement);
+  cardInfo.appendChild(platformElement);
+  cardInfo.appendChild(favoriteButton);
+
+  return container.appendChild(cardTemplate);
+}
+
 // function addUserCard(user) {
 //   //Select this card, and then CLONE IT.
 //   console.log(user);
@@ -115,8 +149,8 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
   fetch("/favorites")
     .then((response) => response.json())
     .then((data) => {
-      let ourStuff = data[0].streamers;
-      ourStuff.forEach((user) => addUserCard(user));
+      console.log(data);
+      data.forEach((user) => addUserCardOffline(user));
       return;
     })
     .catch((error) => console.error(error));
