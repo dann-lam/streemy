@@ -143,7 +143,7 @@ router.get("/online", withAuth, async (req, res) => {
   }
 });
 
-outer.get("/favorites", withAuth, async (req, res) => {
+router.get("/favorites", withAuth, async (req, res) => {
   try {
     const streamerData = await User_Streamer.findAll({
       where: {
