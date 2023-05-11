@@ -254,3 +254,10 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #4b367c; 
 }
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
