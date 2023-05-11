@@ -7,9 +7,25 @@ function addUserCard(user) {
   card.querySelector('.card-username').textContent = user.username;
   card.querySelector('.card-streaming').textContent = user.streaming;
 
-  // Remove the template class, add user status class, and display the card
+ 
   card.classList.remove('card-template');
   card.classList.add(user.status); 
+
+  const favoriteButton = document.createElement('button');
+  favoriteButton.classList.add('favorite-button');
+  favoriteButton.innerHTML = user.isFavorited ? '★' : '☆'; 
+
+  favoriteButton.addEventListener('click', () => {
+    fetch(`/favorites/${user.id}`, { method: 'POST' }) 
+      .then(response => {
+       
+        if (response.ok) {
+          favoriteButton.innerHTML = '★';
+        }
+      })
+      .catch(error => console.error(error));
+  });
+
 
   // Append card to the container
   const streamersContainer = document.querySelector('.streamers-container');
@@ -97,4 +113,17 @@ document.querySelector('.status-button.offline').addEventListener('click', () =>
       data.forEach(user => addUserCard(user));
     })
     .catch(error => console.error(error));
+});
+
+document.querySelector('#logout-button').addEventListener('click', () => {
+  fetch('/logout', { method: 'POST' })
+      .then(response => {
+          if (response.ok) {
+              // Redirect user to login page, or show a "logged out" message, etc.
+              window.location.href = '/login'; 
+          } else {
+              console.error('Logout failed');
+          }
+      })
+      .catch(error => console.error(error));
 });
