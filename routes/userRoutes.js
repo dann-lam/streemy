@@ -35,7 +35,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-
 // // CREATE new user
 // router.post("/", async (req, res) => {
 //   try {
@@ -153,9 +152,7 @@ router.get("/logout", (req, res) => {
   }
 });
 
-
 /*userRoutes*/
-
 
 // router.get("/", async (req, res) => {
 //   try {
@@ -169,20 +166,20 @@ router.get("/logout", (req, res) => {
 // withAuth
 router.get("/online", async (req, res) => {
   try {
-    console.log("Online route Hit!");
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
 
     const streamerData = await User_Streamer.findAll({
-      where: {
-        user: ourUserID,
-      },
+
       include: [
         {
           model: Streamer,
           attributes: ["name"],
         },
       ],
+      where: {
+        user: ourUserID,
+      },
     });
 
     console.log(ourUserID);
@@ -191,15 +188,15 @@ router.get("/online", async (req, res) => {
     }
     console.log(streamerData);
 
-    const streamers = streamerData.map((userStreamer) => {
-      const streamer = userStreamer.Streamer.get({ plain: true });
-      return {
-        ...userStreamer.get({ plain: true }),
-        streamer_name: streamer.name,
-      };
-    });
-
-    res.json(streamers);
+    // const streamers = streamerData.map((userStreamer) => {
+    //   const streamer = userStreamer.Streamer.get({ plain: true });
+    //   return {
+    //     ...userStreamer.get({ plain: true }),
+    //     streamer_name: streamer.name,
+    //   };
+    // });
+    // res.json(streamers);
+    res.json(streamerData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -238,4 +235,3 @@ router.get("/favorites", withAuth, async (req, res) => {
 });
 
 module.exports = router;
-
