@@ -170,16 +170,15 @@ router.get("/online", async (req, res) => {
     console.log("Our UserID!: ", ourUserID);
 
     const streamerData = await User_Streamer.findAll({
-
-      include: [
-        {
-          model: Streamer,
-          attributes: ["name"],
-        },
-      ],
       where: {
         user: ourUserID,
       },
+      // include: [
+      //   {
+      //     model: Streamer,
+      //     attributes: ["name"],
+      //   },
+      // ],
     });
 
     console.log(ourUserID);
