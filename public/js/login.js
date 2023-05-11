@@ -39,6 +39,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // const data = await response.json();
 
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Logged in successfully");
+      window.location.href = "/index.html"; 
+    } else {
+      console.log("Login failed");
+    }
+  });
+    
     // if (response.ok) {
     //   console.log("Is ok");
     // } else {
@@ -51,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Process the response data (e.g., save token, redirect to dashboard, etc.)
 
     // Display an error message (e.g., incorrect email or password)
-  });
+
 
   signupForm.addEventListener("submit", async function (e) {
     e.preventDefault();
