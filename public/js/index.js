@@ -111,10 +111,13 @@ function onNewUser(newUser) {
 
 document.querySelector(".favorites-button").addEventListener("click", () => {
   // Fetch data for the favorite streamers and populate the cards
+  clearStreamersContainer();
   fetch("/favorites")
     .then((response) => response.json())
     .then((data) => {
-      data.forEach((user) => addUserCard(user));
+      let ourStuff = data[0].streamers;
+      ourStuff.forEach((user) => addUserCard(user));
+      return;
     })
     .catch((error) => console.error(error));
 });
