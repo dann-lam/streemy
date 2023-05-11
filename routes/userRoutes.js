@@ -98,7 +98,7 @@ router.get("/logout", (req, res) => {
 });
 
 /*userRoutes*/
-
+//Oh, someone called me!
 router.get("/online", withAuth, async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
@@ -136,7 +136,9 @@ router.get("/online", withAuth, async (req, res) => {
     // });
     // res.json(streamers);
     res.status(200).json(streamerData);
+    //Give me our list.
   } catch (err) {
+    //GO away.
     res.status(500).json(err);
   }
 });

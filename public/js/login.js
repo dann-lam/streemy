@@ -42,25 +42,24 @@ document.addEventListener("DOMContentLoaded", function () {
     if (response.ok) {
       const data = await response.json();
       console.log("Logged in successfully");
-      window.location.href = "/index.html"; 
+      window.location.href = "/index.html";
     } else {
       console.log("Login failed");
     }
   });
-    
-    // if (response.ok) {
-    //   console.log("Is ok");
-    // } else {
-    //   console.log("is not ok");
-    // }
 
-    // console.log("Data received.");
-    // console.log(data.user);
+  // if (response.ok) {
+  //   console.log("Is ok");
+  // } else {
+  //   console.log("is not ok");
+  // }
 
-    // Process the response data (e.g., save token, redirect to dashboard, etc.)
+  // console.log("Data received.");
+  // console.log(data.user);
 
-    // Display an error message (e.g., incorrect email or password)
+  // Process the response data (e.g., save token, redirect to dashboard, etc.)
 
+  // Display an error message (e.g., incorrect email or password)
 
   signupForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (response.ok) {
       const data = await response.json();
       console.log("Signed in successfully");
-      window.location.href = "/index.html"; 
+      window.location.href = "/index.html";
     } else {
       console.log("Signup failed");
     }
