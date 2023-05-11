@@ -104,6 +104,21 @@ document
     filterCards("offline");
   });
 
+  const statusButtons = document.querySelectorAll('.status-button, .favorites-button');
+
+  statusButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // First, remove 'active' class from all status buttons
+      statusButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Then, add 'active' class to the clicked button
+      this.classList.add('active');
+    });
+  });
+  
+
 function onNewUser(newUser) {
   // Add a card for the new user
   addUserCard(newUser);
