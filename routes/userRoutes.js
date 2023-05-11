@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { User, Platform, Streamer, User_Streamer } = require("../../models");
-const { update } = require("../../models/User");
+const { User, Platform, Streamer, User_Streamer } = require("../models");
+const { update } = require("../models/User");
 const path = require("path");
 
 router.post("/signup", async (req, res) => {
@@ -39,19 +39,19 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// CREATE new user
-router.post("/", async (req, res) => {
-  try {
-    req.session.save(() => {
-      req.session.loggedIn = true;
+// // CREATE new user
+// router.post("/", async (req, res) => {
+//   try {
+//     req.session.save(() => {
+//       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+//       res.status(200).json(dbUserData);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 // router.get("/login", async (req, res) => {
 //   try {
@@ -64,8 +64,7 @@ router.post("/", async (req, res) => {
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
-    console.log(__dirname);
-    return res.sendFile(path.join(__dirname, "../../views/login.html"));
+    return res.sendFile(path.join(__dirname, "../public/login.html"));
   } else {
     console.log("Hi!");
     // res.redirect("/online");
@@ -77,7 +76,7 @@ router.post("/login", async (req, res) => {
     console.log(req.body);
     // Find the user who matches the posted e-mail address
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log("Hi!!!! Post log in route hit!!!");
+
     if (!userData) {
       res
         .status(400)
@@ -87,7 +86,7 @@ router.post("/login", async (req, res) => {
 
     // Verify the posted password with the password store in the database
     const validPassword = await userData.checkPassword(req.body.password);
-
+    
     if (!validPassword) {
       res
         .status(400)
@@ -106,6 +105,7 @@ router.post("/login", async (req, res) => {
       res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
+    console.log("hi steve");
     res.status(400).json(err);
   }
 });
