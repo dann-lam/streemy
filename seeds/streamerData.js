@@ -15,7 +15,7 @@ const streamerData = [
   },
   {
     name: "PewDiePie",
-    streamer_url: "http://google.com",
+    streamer_url: "https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw",
     platform_id: 3,
     is_online: true,
   },
