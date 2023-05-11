@@ -73,11 +73,9 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    console.log("I am printing the request body.");
-    console.log(req.body);
     // Find the user who matches the posted e-mail address
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log(req);
+
     if (!userData) {
       res.status(400).json({ message: "Incorrect email" });
       return;
@@ -97,11 +95,10 @@ router.post("/login", async (req, res) => {
       req.session.logged_in = true;
 
       // Redirect to index.html upon successful login
-
-      res.json({ user: userData, message: "You are now logged in!" });
+      console.log("Res.status(200)");
+      res.status(200).redirect("/index.html");
     });
   } catch (err) {
-    console.log("hi steve");
     res.status(400).json(err);
   }
 });
@@ -111,7 +108,7 @@ router.post("/logout", (req, res) => {
     // Remove the session variables
     req.session.destroy(() => {
       // Redirect to login.html upon successful logout
-      res.redirect("/login.html");
+      res.redirect("/login");
     });
   } else {
     res.status(404).end();
