@@ -143,6 +143,25 @@ router.get("/online", withAuth, async (req, res) => {
   }
 });
 
+outer.get("/favorites", withAuth, async (req, res) => {
+  try {
+    const streamerData = await User_Streamer.findAll({
+      where: {
+        favorited: false, 
+        user_id: req.session.user_id, 
+      },
+      include: [
+        {
+          model: Streamer, 
+        },
+      ],
+    });
+    res.status(200).json(streamerData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/offline", withAuth, async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
