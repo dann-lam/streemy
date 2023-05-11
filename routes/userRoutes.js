@@ -214,9 +214,6 @@ router.patch("/:id", withAuth, async (req, res) => {
     });
 
     //Query the thing again, and then send back our thing.
-    console.log(updateData);
-    console.log("UPdate Data:");
-    console.log(boolData);
     res.status(200).json(boolData);
   } catch (err) {
     console.log("Hit our error!", err);
