@@ -36,18 +36,44 @@ header {
 
 }
 
+:root {
+  --card-bg-color: grey;
+  --card-padding: 20px;
+  --card-radius: 10px;
+  --card-margin: 30px;
+  --card-width: 250px;
+  --card-shadow-color: rgba(39, 10, 77, 0.2);
+  --card-border-color: aqua;
+  --transition-speed: 0.3s;
+  --hover-scale: 1.05;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --card-width: 100%;
+    --card-padding: 10px;
+    --card-margin: 15px;
+  }
+}
+
 .card {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  padding: 20px;
+  background-color: var(--card-bg-color);
+  padding: var(--card-padding);
   justify-content: space-between;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(39, 10, 77, 0.2), 0 0 0 2px aqua;
-  transition: all 0.3s ease-in-out;
-  margin: 30px;
-  width: 250px;
+  border-radius: var(--card-radius);
+  box-shadow: 0 4px 8px var(--card-shadow-color), 0 0 0 2px var(--card-border-color);
+  transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
+  margin: var(--card-margin);
+  width: var(--card-width);
 }
+
+.card:hover {
+  transform: scale(var(--hover-scale));
+  box-shadow: 0 6px 12px var(--card-shadow-color), 0 0 0 2px var(--card-border-color);
+}
+
 
 .card:hover {
   transform: translateY(-5px);
@@ -270,7 +296,7 @@ input[type="submit"]:hover {
   position: absolute;
   right: 10px;
   top: 10px;
-  font-size: 1em;
+  font-size: 1em;n
   font-weight: bold;
   padding: 5px 10px;
   color: #fff;
