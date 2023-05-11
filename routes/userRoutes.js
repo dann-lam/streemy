@@ -169,34 +169,37 @@ router.get("/logout", (req, res) => {
 // withAuth
 router.get("/online", async (req, res) => {
   try {
-    //Once logging in,
-    //Save ID on client side
-    //Once logged in, pass it as a parameter.
-    //Save ID on local storage.
-    //Grab it from local storage object
-    //Send it as a parameter.
     console.log("Online route Hit!");
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
+
     const streamerData = await User_Streamer.findAll({
-      // include
-      //Find the streamers where the user ID is OUR user ID.
-      //I'm logged in as user ID 2.
-      //So, I have to get our USER ID somehow??
-      //SESSION ID?
-      //After we do our SQL Database query where we only get back streamers based on our USER ID
-      //We save that query, (because it'll only contain our streamers based on user ID) to a variable.
-      //Inside that variable is going to be an object of some kind, and we simply respond with a res.json (with our variable inside)
       where: {
         user: ourUserID,
       },
+      include: [
+        {
+          model: Streamer,
+          attributes: ["name"],
+        },
+      ],
     });
+
     console.log(ourUserID);
     if (!streamerData) {
       console.log("No streamer data found!");
     }
     console.log(streamerData);
-    res.json(streamerData);
+
+    const streamers = streamerData.map((userStreamer) => {
+      const streamer = userStreamer.Streamer.get({ plain: true });
+      return {
+        ...userStreamer.get({ plain: true }),
+        streamer_name: streamer.name,
+      };
+    });
+
+    res.json(streamers);
   } catch (err) {
     res.status(500).json(err);
   }
