@@ -45,7 +45,8 @@ header {
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(39, 10, 77, 0.2), 0 0 0 2px aqua;
   transition: all 0.3s ease-in-out;
-  margin: 20px;
+  margin: 30px;
+  width: 250px;
 }
 
 .card:hover {
@@ -286,21 +287,21 @@ input[type="submit"]:hover {
 }
 
 .platform-twitch {
-  box-shadow: 0 0 10px 5px #6441A5;
+  box-shadow: 0 0 5px 8px #6441A5;
 }
 
 .platform-youtube {
-  box-shadow: 0 0 10px 5px #FF0000;
+  box-shadow: 0 0 5px 8px #FF0000;
 }
 
 .platform-tiktok {
-  box-shadow: 0 0 10px 5px #000000;
+  box-shadow: 0 0 5px 8px #000000;
 }
 
 .platform-rumble {
-  box-shadow: 0 0 10px 5px #FF5700;
+  box-shadow: 0 0 5px 8px #FF5700;
 }
 
 .platform-kick {
-  box-shadow: 0 0 10px 5px #003580;
+  box-shadow: 0 0 5px 8px #003580;
 }

@@ -122,7 +122,7 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
 document
   .querySelector(".status-button.offline")
   .addEventListener("click", () => {
-    // Fetch data for offline streamers and populate the cards
+    clearStreamersContainer();
     fetch("/offline")
       .then((response) => response.json())
       .then((data) => {
@@ -148,7 +148,6 @@ document
   .querySelector(".status-button.online")
   .addEventListener("click", () => {
     clearStreamersContainer();
-    //Call this person.
     fetch("/online")
       //
       .then((response) => response.json())
