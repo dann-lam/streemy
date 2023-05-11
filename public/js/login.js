@@ -77,9 +77,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (response.ok) {
       const data = await response.json();
-      // Process the response data (e.g., save token, redirect to dashboard, etc.)
+      console.log("Signed in successfully");
+      window.location.href = "/index.html"; 
     } else {
-      // Display an error message (e.g., email already exists)
+      console.log("Signup failed");
     }
   });
 });
