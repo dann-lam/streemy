@@ -126,13 +126,15 @@ document
     fetch("/offline")
       .then((response) => response.json())
       .then((data) => {
-        data.forEach((user) => addUserCard(user));
+        let ourStuff = data[0].streamers;
+        ourStuff.forEach((user) => addUserCard(user));
+        return;
       })
       .catch((error) => console.error(error));
   });
 
 document.querySelector("#logout-button").addEventListener("click", () => {
-  fetch("/logout", { method: "POST" })
+  fetch("/logout")
     .then((response) => {
       if (response.ok) {
         // Redirect user to login page, or show a "logged out" message, etc.
