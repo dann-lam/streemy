@@ -114,3 +114,16 @@ document.querySelector('.status-button.offline').addEventListener('click', () =>
     })
     .catch(error => console.error(error));
 });
+
+document.querySelector('#logout-button').addEventListener('click', () => {
+  fetch('/logout', { method: 'POST' })
+      .then(response => {
+          if (response.ok) {
+              // Redirect user to login page, or show a "logged out" message, etc.
+              window.location.href = '/login'; 
+          } else {
+              console.error('Logout failed');
+          }
+      })
+      .catch(error => console.error(error));
+});
