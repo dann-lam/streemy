@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     //I probably need to set up receiving responses better.
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    if (response.ok) {
-      console.log("Is ok");
-    } else {
-      console.log("is not ok");
-    }
+    // if (response.ok) {
+    //   console.log("Is ok");
+    // } else {
+    //   console.log("is not ok");
+    // }
 
     // console.log("Data received.");
     // console.log(data.user);

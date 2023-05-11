@@ -6,38 +6,34 @@ const path = require("path");
 router.post("/signup", async (req, res) => {
   try {
     console.log("Is our signup route getting hit??");
-    // Find the user who matches the posted e-mail address
-    //Get the username.
     let passwordInput = req.body.password;
     let emailInput = req.body.email;
-    //We should check to see if the user is already in the database already
-    //If they are, then we can send a message saying that person already exists.
-    //Otherwise register the user.
-    const userData = await User.findOne({
+
+    const existingUserData = await User.findOne({
       where: { email: emailInput },
     });
-    //If you cannot find on signup... that means there is no user with that email. Which means we can sign them up.
-    if (!userData) {
-      // const dbUserData =
-      User.create({
+
+    if (!existingUserData) {
+      const newUser = await User.create({
         email: emailInput,
         password: passwordInput,
       });
+
       req.session.save(() => {
-        req.session.user_id = userData.id;
+        req.session.user_id = newUser.id;
         req.session.logged_in = true;
 
-        // Redirect to index.html upon successful signup
         console.log(req.session.user_id);
         res.redirect("/index.html");
       });
+    } else {
+      // User with the same email already exists, handle the error here.
     }
-
-    // Create session variables based on the logged in user
   } catch (err) {
     res.status(400).json(err);
   }
 });
+
 
 // // CREATE new user
 // router.post("/", async (req, res) => {
@@ -66,8 +62,7 @@ router.get("/login", (req, res) => {
   if (!req.session.logged_in) {
     return res.sendFile(path.join(__dirname, "../public/login.html"));
   } else {
-    console.log("Hi!");
-    // res.redirect("/online");
+    res.redirect("/index.html");
   }
 });
 
@@ -96,14 +91,27 @@ router.post("/login", async (req, res) => {
 
       // Redirect to index.html upon successful login
       console.log("Res.status(200)");
-      res.status(200).redirect("/index.html");
+      res.redirect("/index.html");
     });
   } catch (err) {
+    console.log("login post 400");
     res.status(400).json(err);
   }
 });
 
 router.post("/logout", (req, res) => {
+  if (req.session.logged_in) {
+    // Remove the session variables
+    req.session.destroy(() => {
+      // Redirect to login.html upon successful logout
+      res.redirect("/login");
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+router.get("/logout", (req, res) => {
   if (req.session.logged_in) {
     // Remove the session variables
     req.session.destroy(() => {
