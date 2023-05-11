@@ -7,52 +7,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <title>Streemy</title>
 </head>
-
   
 <body>
-   
-      
     <header>
         <img src="https://freepngimg.com/thumb/mario/92471-toy-art-bros-mario-bowser-super.png" class="header-image" />
         <button id="logout-button" class="logout-button">Logout</button>
     </header>
       
-     <main>
-        
-        <div class="content-wrapper">
-           
-<div class="card-template" style="display:none;">
-    <div class="card">
-        <img class="card-avatar" src="#" alt="User Avatar">
-        <div class="card-info">
-            <h3 class="card-username"></h3>
-            <p class="card-platform"></p>
-        </div>
-    </div>
-</div>
-
+    <main>
+     
             <section class="favorites-section">
-                
                 <div class="favorites-container">
                     <button class="favorites-button">Favorites</button>
                     <button class="status-button online">Online</button>
                     <button class="status-button offline">Offline</button>
                 </div>
-                <div class="favorites-streamers-container"></div>
+                <div class="content-wrapper">
+                    <div class="card-template">
+                        <div class="card">
+                            <img class="card-avatar" src="https://via.placeholder.com/150" alt="User Avatar">
+                            <div class="card-info">
+                                <h3 class="card-username">Sample Streamer</h3>
+                                <p class="card-platform">Sample Platform</p>
+                                <button class="favorite-button">☆</button>
+                            </div>
+                        </div>
+                    </div>
+        
                 <div class="streamers-container"></div>
             </section>
-
-
-            <div class="card-template">
-                <div class="card">
-                    <img class="card-avatar" src="https://via.placeholder.com/150" alt="User Avatar">
-                    <div class="card-info">
-                        <h3 class="card-username">John Doe</h3>
-                        <p class="card-streaming">streaming... valorant</p>
-                    </div>
-                </div>
-            </div>         
-</div>
+        </div>
     </main>
 
     <footer>
