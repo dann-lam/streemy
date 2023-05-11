@@ -154,6 +154,8 @@ router.get("/logout", (req, res) => {
 });
 
 
+/*userRoutes*/
+
 
 // router.get("/", async (req, res) => {
 //   try {
