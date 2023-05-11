@@ -1,8 +1,11 @@
 function addUserCard(user) {
+  const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
   const favoriteButton = document.createElement("button");
   const nameElement = document.createElement("h3");
   const platformElement = document.createElement("p");
+  const cardInfo = document.createElement("div");
+  const cardTemplate = document.createElement("div");
   //Remember to make something for the avatar! :)
   const streamerURL = user.user_streamer;
   const streamerOnline = user.is_online;
@@ -10,18 +13,21 @@ function addUserCard(user) {
   favoriteButton.innerHTML = user.isFavorited ? "★" : "☆";
   platformElement.textContent = user.platform.platform_name;
 
-  card.appendChild(nameElement);
-  card.appendChild(platformElement);
-  card.appendChild();
-
-  card.classList.add("streamer-card");
+  cardTemplate.classList.add("card-template");
+  cardInfo.classList.add("card-info");
+  card.classList.add("card");
   favoriteButton.classList.add("favorite-button");
   nameElement.classList.add("card-username");
   platformElement.classList.add("card-platform");
-  platformElement.classList.add(
-    `platform-${user.platform.platform_name.toLowerCase()}`
-  );
-  return;
+  card.classList.add(`platform-${user.platform.platform_name.toLowerCase()}`);
+
+  cardTemplate.appendChild(card);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(nameElement);
+  cardInfo.appendChild(platformElement);
+  cardInfo.appendChild(favoriteButton);
+
+  return container.appendChild(cardTemplate);
 }
 
 // function addUserCard(user) {
@@ -149,6 +155,7 @@ document
       .then((data) => {
         let ourStuff = data[0].streamers;
         ourStuff.forEach((hotdog) => addUserCard(hotdog));
+        // data.forEach((streamer) => addUserCard(streamer));
         return;
         //Promise not resolved.
       })
