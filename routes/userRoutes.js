@@ -73,24 +73,21 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    console.log("I am printing the request body.");
     console.log(req.body);
     // Find the user who matches the posted e-mail address
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    console.log(req);
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+      res.status(400).json({ message: "Incorrect email" });
       return;
     }
 
     // Verify the posted password with the password store in the database
     const validPassword = await userData.checkPassword(req.body.password);
-    
+
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+      res.status(400).json({ message: "Incorrect password" });
       return;
     }
 
@@ -100,7 +97,6 @@ router.post("/login", async (req, res) => {
       req.session.logged_in = true;
 
       // Redirect to index.html upon successful login
-      res.redirect("/index.html");
 
       res.json({ user: userData, message: "You are now logged in!" });
     });

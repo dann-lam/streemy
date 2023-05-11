@@ -3,14 +3,14 @@ const { User, Streamer, Platform, User_Streamer } = require("../models");
 const withAuth = require("../utils/auth");
 const path = require("path");
 
-router.get("/", async (req, res) => {
-  try {
-    let yee = await { Message: "We got got." };
-    res.status(200).json(yee);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     let yee = await { Message: "We got got." };
+//     res.status(200).json(yee);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
 //Deleted withAuth lol
 // withAuth
 router.get("/online", async (req, res) => {
