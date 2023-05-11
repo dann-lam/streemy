@@ -2,7 +2,7 @@ const { Streamer } = require("../models");
 
 const streamerData = [
   {
-    name: "streamer1",
+    name: "xQc",
     streamer_url: "http://google.com",
     platform_id: 1,
     is_online: false,

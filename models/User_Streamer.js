@@ -10,20 +10,22 @@ User_Streamer.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    user: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "user",
         key: "id",
       },
+      allowNull: false,
       // field: "user",
     },
-    streamer: {
+    streamer_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "streamer",
         key: "id",
       },
+      allowNull: false,
       // field: "streamer",
     },
     favorited: {

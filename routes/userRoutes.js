@@ -6,7 +6,6 @@ const withAuth = require("../utils/auth");
 
 router.post("/signup", async (req, res) => {
   try {
-    console.log("Is our signup route getting hit??");
     let passwordInput = req.body.password;
     let emailInput = req.body.email;
 
@@ -164,24 +163,26 @@ router.get("/logout", (req, res) => {
 // });
 //Deleted withAuth lol
 // withAuth
-router.get("/online", async (req, res) => {
+router.get("/online", withAuth, async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
-
-    const streamerData = await User_Streamer.findAll({
+    const streamerData = await User.findAll({
       where: {
-        user: ourUserID,
+        id: ourUserID,
       },
-      // include: [
-      //   {
-      //     model: Streamer,
-      //     attributes: ["name"],
-      //   },
-      // ],
+      include: [
+        {
+          model: Streamer,
+          include: [
+            {
+              model: Platform,
+            },
+          ],
+        },
+      ],
     });
 
-    console.log(ourUserID);
     if (!streamerData) {
       console.log("No streamer data found!");
     }
@@ -195,7 +196,7 @@ router.get("/online", async (req, res) => {
     //   };
     // });
     // res.json(streamers);
-    res.json(streamerData);
+    res.status(200).json(streamerData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -203,10 +204,15 @@ router.get("/online", async (req, res) => {
 
 router.get("/offline", withAuth, async (req, res) => {
   try {
-    const streamerData = await Streamer.findAll({
+    const streamerData = await User.findAll({
       where: {
-        online: false,
+        id: ourUserIDm,
       },
+      include: [
+        {
+          model: Streamer,
+        },
+      ],
     });
     const streamers = streamerData.map((streamer) =>
       streamer.get({ plain: true })
