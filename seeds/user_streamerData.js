@@ -42,6 +42,7 @@ const user_streamerData = [
   {
     user_id: 2,
     streamer_id: 8,
+    favorited: true,
   },
   {
     user_id: 3,
@@ -60,6 +61,7 @@ const user_streamerData = [
   {
     user_id: 3,
     streamer_id: 6,
+    favorited: true,
   },
   {
     user_id: 4,
@@ -91,6 +93,7 @@ const user_streamerData = [
   {
     user_id: 5,
     streamer_id: 4,
+    favorited: true,
   },
   {
     user_id: 5,
