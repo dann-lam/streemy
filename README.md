@@ -4,6 +4,16 @@ Streemy is an application that aggregates streams from different platforms, allo
 
 [Check it out!](https://young-tor-26363.herokuapp.com/)
 
+## Technology Used
+
+| Technology Used         | Resource URL           |
+| ------------- |:-------------:|
+| Git | [https://git-scm.com/](https://git-scm.com/)     |
+| JS  | [https://www.javascript.com/](https://www.javascript.com/)     |
+| Node  | [https://nodejs.org/en](https://nodejs.org/en)     |
+| MySQL  | [https://www.mysql.com/](https://www.mysql.com/)     |
+| Sequelize  | [https://sequelize.org/](https://sequelize.org/)     |
+
 ## Table of Contents
 * [Usage](#usage)
 * [Instructions](#Instructions)
