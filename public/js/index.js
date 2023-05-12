@@ -1,14 +1,15 @@
+//global variable representing the interest area of a user defaulting to "online"
 var currTab = "online";
 
 let popupWindow = null;
-
+//Function dedicated to resetting content in a container.
 function clearStreamersContainer() {
   const streamersContainer = document.querySelector(".streamers-container");
   while (streamersContainer.firstChild) {
     streamersContainer.removeChild(streamersContainer.firstChild);
   }
 }
-
+//Switch function dedicated to figuring out which tab the user is on.
 let onFavOff = (string) => {
   if (string === "offline") {
     clearStreamersContainer();
@@ -23,7 +24,7 @@ let onFavOff = (string) => {
   console.log("you fed me wrong");
   return;
 };
-
+//Routing for the "offline" route,.
 let offlineFunc = () => {
   fetch("/offline")
     .then((response) => response.json())
@@ -34,6 +35,8 @@ let offlineFunc = () => {
     })
     .catch((error) => console.error(error));
 };
+
+//Routing for updating which users are favorited on the backend.
 let patchFav = (inNum, inString) => {
   fetch("/favNum", {
     method: "PATCH",
@@ -45,10 +48,10 @@ let patchFav = (inNum, inString) => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data), onFavOff(inString))
+    .then((data) => onFavOff(inString))
     .catch((error) => console.error(error));
 };
-
+//Routing for loging in.
 let loginFunc = () => {
   fetch("/login")
     .then((response) => {
@@ -61,7 +64,7 @@ let loginFunc = () => {
     })
     .catch((error) => console.error(error));
 };
-
+//Routing for retrieving our favorited streamers.
 let favoriteFunc = () => {
   fetch("/favorites")
     .then((response) => response.json())
@@ -71,7 +74,7 @@ let favoriteFunc = () => {
     })
     .catch((error) => console.error(error));
 };
-
+//Routing for retrieving which streamers are online.
 let onlineFunc = () => {
   fetch("/online")
     //
@@ -85,7 +88,7 @@ let onlineFunc = () => {
     })
     .catch((error) => console.error(error));
 };
-
+//Function for Creating a card for "Online" and "Offline" routes.
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
@@ -141,6 +144,8 @@ function addUserCard(user) {
 
   return container.appendChild(cardTemplate);
 }
+
+//Unfortunate repeat, but the nature of the routing kinda forces me to change up a few variables. Could 100% be dryer, but I don't have time to fix it.
 
 function addUserCardFavorite(user) {
   const container = document.querySelector(".streamers-container");
@@ -242,10 +247,6 @@ document
 document.querySelector(".login-button").addEventListener("click", () => {
   loginFunc();
 });
-
-// document.querySelector(".favorite-button").addEventListener("click", () => {
-//   console.log("Hi!");
-// });
 
 document.querySelector("#logout-button").addEventListener("click", () => {
   fetch("/logout")
