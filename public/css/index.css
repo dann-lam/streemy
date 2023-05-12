@@ -40,13 +40,14 @@ header {
 
   display: flex;
   align-items: center;
-  background-color: white;
+ 
   padding: 20px;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 8px 20px rgba(39, 10, 77, 0.2), 0 0 0 2px aqua;
   transition: all 0.3s ease-in-out;
   margin: 30px;
+  height: 20px;
   width: 250px;
 }
 
@@ -71,9 +72,9 @@ header {
   margin-right: auto;
 }
 
-.card .card-username {
+.card .card-name {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0;
   margin-bottom: 5px;
   color: #1F1F1F;
@@ -81,10 +82,11 @@ header {
 
 .card .card-platform {
   text-align: left;
-  font-size: 16px;
+  font-size: 12px;
   margin: 0;
   color: #666;
   text-transform: uppercase;
+  color: white;
 }
 
 .card .card-streaming {
@@ -191,34 +193,40 @@ a {
 }
 
 .platform-twitch {
-  box-shadow: 0 0 5px 8px #6441A5;
-
+  box-shadow: 0 0 2px 4px purple;
+  background-color: purple;
 }
 
 .platform-youtube {
-  box-shadow: 0 0 5px 8px #FF0000;
+  box-shadow: 0 0 2px 4px red;
+  background-color: red;
 }
 
 .platform-tiktok {
-  box-shadow: 0 0 5px 8px #000000;
+  box-shadow: 0 0 2px 4px blue;
+  background-color: blue;
 }
 
 .platform-rumble {
-  box-shadow: 0 0 5px 8px #FF5700;
+  box-shadow: 0 0 2px 4px #FF5700;
+  background-color: #FF5700;
 }
 
 .platform-kick {
-  box-shadow: 0 0 5px 8px  green;
+  box-shadow: 0 0 2px 4px  green;
+  background-color: green;
 }
+
 
 .card-info {
   display: flex;
   align-items: center;
   justify-content: space-between;
- 
+ color: white;
 }
 
 .favorite-button {
+  cursor: pointer;
   order: 1;
 }
 
@@ -228,6 +236,13 @@ a {
 
 .card-platform {
   order: 3;
+}
+
+
+.favorite-button {
+  background: transparent; 
+  border: none; 
+  color: gold; 
 }
 
 
