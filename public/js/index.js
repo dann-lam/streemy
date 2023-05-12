@@ -28,7 +28,7 @@ function addUserCard(user) {
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
   card.classList.add("card");
-  // favoriteButton.classList.add("favorites-icon");
+  favoriteButton.classList.add("favorites-icon");
   nameElement.classList.add("card-username");
   platformElement.classList.add("card-platform");
   card.classList.add(`platform-${user.platform.platform_name.toLowerCase()}`);
@@ -88,6 +88,8 @@ function addUserCardFavorite(user) {
     `platform-${user.streamer.platform.platform_name.toLowerCase()}`
   );
   card.classList.add("favorite-card");
+
+  favoriteButton.classList.add("favorites-icon");
 
   cardTemplate.appendChild(card);
   card.appendChild(cardLink); // Wrap the card content inside the anchor element

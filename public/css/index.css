@@ -76,7 +76,7 @@ header {
 
 
 .favorites-icon {
-  
+  z-index: 4;
 }
 
 .card .card-name {
