@@ -2,9 +2,15 @@
 Streemy is an application that aggregates streams from different platforms, allowing users to track their favorite streamers easily. It provides features such as displaying online and offline streamers and the ability to favorite streamers.
 
 ## Table of Contents
+Instructions
 Usage
 Features
 Contributing
+
+## Instructions
+In order to install, run npm install.
+Seed your database, schema can be found in schema/dbj.
+DB can be seeded with npm run seed.
 
 ## Usage
 This application is simple to use! Simply login to Streemy and start adding your favorite streamers. The interface allows you to see the online/offline status of your streamers and navigate directly to their streams.
