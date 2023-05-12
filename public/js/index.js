@@ -8,12 +8,17 @@ function addUserCard(user) {
   const platformElement = document.createElement("p");
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
-  //Remember to make something for the avatar! :)
+  const cardLink = document.createElement("a"); // Create anchor element
+
   const streamerURL = user.user_streamer;
   const streamerOnline = user.is_online;
   nameElement.textContent = user.name;
   favoriteButton.innerHTML = user.isFavorited ? "★" : "☆";
   platformElement.textContent = user.platform.platform_name;
+
+  cardLink.href = user.streamer_url; // Set the anchor's href attribute
+  cardLink.target = "_blank";
+  cardLink.style.textDecoration = 'none'; // Remove the underline from the text
 
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
@@ -24,7 +29,8 @@ function addUserCard(user) {
   card.classList.add(`platform-${user.platform.platform_name.toLowerCase()}`);
 
   cardTemplate.appendChild(card);
-  card.appendChild(cardInfo);
+  card.appendChild(cardLink); // Wrap the card content inside the anchor element
+  cardLink.appendChild(cardInfo);
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
@@ -40,12 +46,17 @@ function addUserCardFavorite(user) {
   const platformElement = document.createElement("p");
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
-  //Remember to make something for the avatar! :)
+  const cardLink = document.createElement("a"); // Create anchor element
+
   const streamerURL = user.streamer.streamer_url;
   const streamerOnline = user.streamer.is_online;
   nameElement.textContent = user.streamer.name;
   favoriteButton.innerHTML = user.favorited ? "★" : "☆";
   platformElement.textContent = user.streamer.platform.platform_name;
+
+  cardLink.href = streamerURL; // Set the anchor's href attribute
+  cardLink.target = "_blank";
+  cardLink.style.textDecoration = 'none'; // Remove the underline from the text
 
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
@@ -59,7 +70,8 @@ function addUserCardFavorite(user) {
   card.classList.add("favorite-card");
 
   cardTemplate.appendChild(card);
-  card.appendChild(cardInfo);
+  card.appendChild(cardLink); // Wrap the card content inside the anchor element
+  cardLink.appendChild(cardInfo); 
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
