@@ -2,10 +2,11 @@
 Streemy is an application that aggregates streams from different platforms, allowing users to track their favorite streamers easily. It provides features such as displaying online and offline streamers and the ability to favorite streamers.
 
 ## Table of Contents
-Instructions
-Usage
-Features
-Contributing
+* [Usage](#usage)
+* [Instructions](#Instructions)
+* [Features](#Features)
+* [Contributing](#Contributing)
+
 
 ## Instructions
 In order to install, run npm install.
