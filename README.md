@@ -49,10 +49,10 @@ Streemy allows users to filter streamers based on their online/offline status. T
 Users can favorite streamers by clicking the 'favorite' button on a User Card. The favorited streamers are stored and can be viewed by clicking the 'Favorites' button.
 
 ## Authentication
-Streemy also includes a basic authentication system. Users can log in or sign up for an account. The authentication system is handled in login.js.
+Streemy also includes a basic authentication system. Users can log in or sign up for an account.
 
-Contributing
+## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-License
+## License
 This project is licensed under the terms of the MIT license.
