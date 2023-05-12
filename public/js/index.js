@@ -1,5 +1,90 @@
-var currTab;
+var currTab = "online";
+
 let popupWindow = null;
+
+function clearStreamersContainer() {
+  const streamersContainer = document.querySelector(".streamers-container");
+  while (streamersContainer.firstChild) {
+    streamersContainer.removeChild(streamersContainer.firstChild);
+  }
+}
+
+let onFavOff = (string) => {
+  if (string === "offline") {
+    clearStreamersContainer();
+    return offlineFunc();
+  } else if (string === "online") {
+    clearStreamersContainer();
+    return onlineFunc();
+  } else if (string === "favorites") {
+    clearStreamersContainer();
+    return favoriteFunc();
+  }
+  console.log("you fed me wrong");
+  return;
+};
+
+let offlineFunc = () => {
+  fetch("/offline")
+    .then((response) => response.json())
+    .then((data) => {
+      let ourStuff = data[0].streamers;
+      ourStuff.forEach((user) => addUserCard(user));
+      return;
+    })
+    .catch((error) => console.error(error));
+};
+let patchFav = (inNum, inString) => {
+  fetch("/favNum", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: inNum,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data), onFavOff(inString))
+    .catch((error) => console.error(error));
+};
+
+let loginFunc = () => {
+  fetch("/login")
+    .then((response) => {
+      if (response.ok) {
+        // Redirect user to login page, or show a "logged out" message, etc.
+        window.location.href = "/login";
+      } else {
+        console.error("Login failed");
+      }
+    })
+    .catch((error) => console.error(error));
+};
+
+let favoriteFunc = () => {
+  fetch("/favorites")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((user) => addUserCardFavorite(user));
+      return;
+    })
+    .catch((error) => console.error(error));
+};
+
+let onlineFunc = () => {
+  fetch("/online")
+    //
+    .then((response) => response.json())
+    .then((data) => {
+      let ourStuff = data[0].streamers;
+      ourStuff.forEach((hotdog) => addUserCard(hotdog));
+      // data.forEach((streamer) => addUserCard(streamer));
+      return;
+      //Promise not resolved.
+    })
+    .catch((error) => console.error(error));
+};
 
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
@@ -50,8 +135,8 @@ function addUserCard(user) {
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    console.log("Favorite Button hit detected");
-    console.log("CurrTab is ", currTab);
+    let num = cardLink.dataset.streamerId;
+    patchFav(num, currTab);
   });
 
   return container.appendChild(cardTemplate);
@@ -66,6 +151,7 @@ function addUserCardFavorite(user) {
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
   const cardLink = document.createElement("a"); // Create anchor element
+
   //ATTRIBUTES FOR FAVORITES
   let streamerId = user.streamerId;
   cardLink.dataset.streamerId = streamerId;
@@ -110,6 +196,8 @@ function addUserCardFavorite(user) {
   favoriteButton.addEventListener("click", (event) => {
     event.stopPropagation();
     console.log("currTab is ", currTab);
+    let num = cardLink.dataset.streamerId;
+    patchFav(num, currTab);
   });
 
   return container.appendChild(cardTemplate);
@@ -162,13 +250,6 @@ function addUserCardFavorite(user) {
 //   });
 // }
 
-function clearStreamersContainer() {
-  const streamersContainer = document.querySelector(".streamers-container");
-  while (streamersContainer.firstChild) {
-    streamersContainer.removeChild(streamersContainer.firstChild);
-  }
-}
-
 const statusButtons = document.querySelectorAll(
   ".status-button, .favorites-button"
 );
@@ -194,13 +275,7 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
   // Fetch data for the favorite streamers and populate the cards
   clearStreamersContainer();
   currTab = "favorites";
-  fetch("/favorites")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((user) => addUserCardFavorite(user));
-      return;
-    })
-    .catch((error) => console.error(error));
+  favoriteFunc();
 });
 
 document
@@ -208,27 +283,11 @@ document
   .addEventListener("click", () => {
     clearStreamersContainer();
     currTab = "offline";
-    fetch("/offline")
-      .then((response) => response.json())
-      .then((data) => {
-        let ourStuff = data[0].streamers;
-        ourStuff.forEach((user) => addUserCard(user));
-        return;
-      })
-      .catch((error) => console.error(error));
+    offlineFunc();
   });
 
 document.querySelector(".login-button").addEventListener("click", () => {
-  fetch("/login")
-    .then((response) => {
-      if (response.ok) {
-        // Redirect user to login page, or show a "logged out" message, etc.
-        window.location.href = "/login";
-      } else {
-        console.error("Login failed");
-      }
-    })
-    .catch((error) => console.error(error));
+  loginFunc();
 });
 
 // document.querySelector(".favorite-button").addEventListener("click", () => {
@@ -253,17 +312,7 @@ document
   .addEventListener("click", () => {
     clearStreamersContainer();
     currTab = "online";
-    fetch("/online")
-      //
-      .then((response) => response.json())
-      .then((data) => {
-        let ourStuff = data[0].streamers;
-        ourStuff.forEach((hotdog) => addUserCard(hotdog));
-        // data.forEach((streamer) => addUserCard(streamer));
-        return;
-        //Promise not resolved.
-      })
-      .catch((error) => console.error(error));
+    onlineFunc();
     //   .catch((error) => console.error(error));
     //   .then((data) => {
     //     data.forEach((user) => addUserCard(user));

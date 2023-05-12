@@ -218,9 +218,9 @@ router.get("/offline", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/favNum", async (req, res) => {
   try {
-    let ourTargID = req.params.id;
+    let ourTargID = req.body.data;
     let ourUserID = req.session.user_id;
 
     const updateData = await User_Streamer.update(
