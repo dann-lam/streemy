@@ -2,15 +2,18 @@ const router = require("express").Router();
 const { User, Platform, Streamer, User_Streamer } = require("../models");
 const { update } = require("../models/User");
 const path = require("path");
-const withAuth = require("../utils/auth");
+
 const { Sequelize } = require("sequelize");
 
-router.get("/", withAuth, async (req, res) => {
+//THIS route never gets hit???
+router.get("/", async (req, res) => {
   try {
+    console.log("This should be working.");
     if (!req.session.logged_in) {
-      return res.sendFile(path.join(__dirname, "../public/login.html"));
+      res.redirect("/login");
     } else {
-      res.redirect("/login.html");
+      console.log("lol");
+      return res.sendFile(path.join(__dirname, "../public/login.html"));
     }
   } catch (err) {
     console.log("Err lol");
@@ -20,9 +23,11 @@ router.get("/", withAuth, async (req, res) => {
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
+    console.log("They're not signed in1");
     return res.sendFile(path.join(__dirname, "../public/login.html"));
   } else {
-    res.redirect("/index.html");
+    console.log("They're signed in2.");
+    res.redirect("/login");
   }
 });
 
@@ -112,7 +117,7 @@ router.get("/logout", (req, res) => {
 
 /*userRoutes*/
 //Oh, someone called me!
-router.get("/online", withAuth, async (req, res) => {
+router.get("/online", async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
@@ -156,7 +161,7 @@ router.get("/online", withAuth, async (req, res) => {
   }
 });
 
-router.get("/favorites", withAuth, async (req, res) => {
+router.get("/favorites", async (req, res) => {
   try {
     const streamerData = await User_Streamer.findAll({
       where: {
@@ -180,7 +185,7 @@ router.get("/favorites", withAuth, async (req, res) => {
   }
 });
 
-router.get("/offline", withAuth, async (req, res) => {
+router.get("/offline", async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
     console.log("Our UserID!: ", ourUserID);
@@ -213,7 +218,7 @@ router.get("/offline", withAuth, async (req, res) => {
   }
 });
 
-router.patch("/:id", withAuth, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     let ourTargID = req.params.id;
     let ourUserID = req.session.user_id;
@@ -244,6 +249,16 @@ router.patch("/:id", withAuth, async (req, res) => {
     res.status(200).json(boolData);
   } catch (err) {
     console.log("Hit our error!", err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/test", async (req, res) => {
+  try {
+    console.log("Test hit!");
+    res.status(200).json({ Message: "Test HIt" });
+  } catch (err) {
+    console.log("Err caught.");
     res.status(500).json(err);
   }
 });

@@ -1,5 +1,3 @@
-let buttonChecker = () => {};
-
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
@@ -13,12 +11,13 @@ function addUserCard(user) {
   const streamerURL = user.user_streamer;
   const streamerOnline = user.is_online;
   nameElement.textContent = user.name;
-  favoriteButton.innerHTML = user.isFavorited ? "★" : "☆";
+  favoriteButton.innerHTML = user.user_streamer.favorited ? "★" : "☆";
+
   platformElement.textContent = user.platform.platform_name;
 
   cardLink.href = user.streamer_url; // Set the anchor's href attribute
   cardLink.target = "_blank";
-  cardLink.style.textDecoration = 'none'; // Remove the underline from the text
+  cardLink.style.textDecoration = "none"; // Remove the underline from the text
 
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
@@ -56,7 +55,7 @@ function addUserCardFavorite(user) {
 
   cardLink.href = streamerURL; // Set the anchor's href attribute
   cardLink.target = "_blank";
-  cardLink.style.textDecoration = 'none'; // Remove the underline from the text
+  cardLink.style.textDecoration = "none"; // Remove the underline from the text
 
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
@@ -71,7 +70,7 @@ function addUserCardFavorite(user) {
 
   cardTemplate.appendChild(card);
   card.appendChild(cardLink); // Wrap the card content inside the anchor element
-  cardLink.appendChild(cardInfo); 
+  cardLink.appendChild(cardInfo);
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
@@ -132,26 +131,6 @@ function clearStreamersContainer() {
     streamersContainer.removeChild(streamersContainer.firstChild);
   }
 }
-
-document.querySelector(".favorites-button").addEventListener("click", () => {
-  clearStreamersContainer();
-});
-
-document
-  .querySelector(".status-button.offline")
-  .addEventListener("click", () => {
-    clearStreamersContainer();
-  });
-
-document
-  .querySelector(".status-button.online")
-  .addEventListener("click", () => {});
-
-document
-  .querySelector(".status-button.offline")
-  .addEventListener("click", () => {
-    filterCards("offline");
-  });
 
 const statusButtons = document.querySelectorAll(
   ".status-button, .favorites-button"
@@ -223,6 +202,7 @@ document
       .then((response) => response.json())
       .then((data) => {
         let ourStuff = data[0].streamers;
+        console.log(ourStuff);
         ourStuff.forEach((hotdog) => addUserCard(hotdog));
         // data.forEach((streamer) => addUserCard(streamer));
         return;
