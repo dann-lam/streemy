@@ -1,5 +1,8 @@
 # Streemy - Your Stream Aggregator
+
 Streemy is an application that aggregates streams from different platforms, allowing users to track their favorite streamers easily. It provides features such as displaying online and offline streamers and the ability to favorite streamers.
+
+[Check it out!](https://young-tor-26363.herokuapp.com/)
 
 ## Table of Contents
 * [Usage](#usage)
