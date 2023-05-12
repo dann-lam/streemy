@@ -9,7 +9,9 @@ Contributing
 
 ## Instructions
 In order to install, run npm install.
+
 Seed your database, schema can be found in schema/dbj.
+
 DB can be seeded with npm run seed.
 
 ## Usage
