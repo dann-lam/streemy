@@ -127,7 +127,7 @@ function addUserCard(user) {
   cardInfo.appendChild(favoriteButton);
 
   // Event listener for the card
-  card.addEventListener("click", (event) => {
+  nameElement.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default event (navigation)
     openStreamer(user.streamer_url);
   });
@@ -187,68 +187,21 @@ function addUserCardFavorite(user) {
   cardInfo.appendChild(favoriteButton);
 
   // Event listener for the card
-  card.addEventListener("click", (event) => {
+  nameElement.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default event (navigation)
     openStreamer(streamerURL);
   });
 
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
+    event.preventDefault();
     event.stopPropagation();
-    console.log("currTab is ", currTab);
     let num = cardLink.dataset.streamerId;
     patchFav(num, currTab);
   });
 
   return container.appendChild(cardTemplate);
 }
-
-// function addUserCard(user) {
-//   //Select this card, and then CLONE IT.
-//   console.log(user);
-//   const cardTemplate = document.querySelector(".card-template");
-//   const card = cardTemplate.cloneNode(true);
-
-//   // Populate card with user data
-//   card.querySelector(".card-avatar").src = user.avatarUrl;
-//   card.querySelector(".card-username").textContent = user.username;
-//   card.querySelector(".card-streaming").textContent = user.streaming;
-//   card.querySelector(".card-name").textContent = user.name; // Add the streamer's name
-
-//   card.classList.remove("card-template");
-//   card.classList.add(user.status);
-//   card.classList.add(`platform-${user.platform.toLowerCase()}`);
-
-//   const favoriteButton = document.createElement("button");
-//   favoriteButton.classList.add("favorite-button");
-//   favoriteButton.innerHTML = user.isFavorited ? "★" : "☆";
-
-//   // Event listener for liking/unliking a user
-//   //How does isFavorited method work
-//   favoriteButton.addEventListener("click", (event) => {
-//     event.stopPropagation(); // Prevent the card's click event
-//     const isFavorited = favoriteButton.innerHTML === "★";
-//     fetch(`/favorites/${user.id}`, { method: isFavorited ? "DELETE" : "POST" })
-//       .then((response) => {
-//         if (response.ok) {
-//           favoriteButton.innerHTML = isFavorited ? "☆" : "★";
-//         }
-//       })
-//       .catch((error) => console.error(error));
-//   });
-
-//   // Append favorite button to the card
-//   card.querySelector(".card-info").appendChild(favoriteButton);
-
-//   // Append card to the container
-//   const streamersContainer = document.querySelector(".streamers-container");
-//   streamersContainer.appendChild(card);
-
-//   // Event listener for card click
-//   card.addEventListener("click", () => {
-//     window.location.href = user.streamer_url; // Open the streamer's URL when the card is clicked
-//   });
-// }
 
 const statusButtons = document.querySelectorAll(
   ".status-button, .favorites-button"
@@ -336,6 +289,6 @@ function openStreamer(streamerUrl) {
   }
 }
 
-card.addEventListener("click", () => {
-  openStreamer(user.streamer_url);
-});
+// card.addEventListener("click", () => {
+//   openStreamer(user.streamer_url);
+// });
