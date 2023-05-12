@@ -9,10 +9,15 @@ function addUserCard(user) {
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
   const cardLink = document.createElement("a"); // Create anchor element
+  //ATTRIBUTE SETTING
+  let streamerId = user.user_streamer.streamerId;
+  cardLink.dataset.streamerId = streamerId;
 
+  //TEXT CONTENT
   const streamerURL = user.user_streamer;
   const streamerOnline = user.is_online;
   nameElement.textContent = user.name;
+
   favoriteButton.innerHTML = user.user_streamer.favorited ? "★" : "☆";
 
   platformElement.textContent = user.platform.platform_name;
@@ -23,7 +28,7 @@ function addUserCard(user) {
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
   card.classList.add("card");
-  favoriteButton.classList.add("favorite-button");
+  // favoriteButton.classList.add("favorites-icon");
   nameElement.classList.add("card-username");
   platformElement.classList.add("card-platform");
   card.classList.add(`platform-${user.platform.platform_name.toLowerCase()}`);
@@ -43,8 +48,8 @@ function addUserCard(user) {
 
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent the card's click event
-    // ... existing code for the favorite button ...
+    event.stopPropagation();
+    console.log("Favorite Button hit detected");
   });
 
   return container.appendChild(cardTemplate);
@@ -59,6 +64,9 @@ function addUserCardFavorite(user) {
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
   const cardLink = document.createElement("a"); // Create anchor element
+  //ATTRIBUTES FOR FAVORITES
+  let streamerId = user.streamerId;
+  cardLink.dataset.streamerId = streamerId;
 
   const streamerURL = user.streamer.streamer_url;
   const streamerOnline = user.streamer.is_online;
@@ -73,7 +81,7 @@ function addUserCardFavorite(user) {
   cardTemplate.classList.add("card-template");
   cardInfo.classList.add("card-info");
   card.classList.add("card");
-  favoriteButton.classList.add("favorite-button");
+  // favoriteButton.classList.add("favorite-button");
   nameElement.classList.add("card-username");
   platformElement.classList.add("card-platform");
   card.classList.add(
@@ -96,8 +104,8 @@ function addUserCardFavorite(user) {
 
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent the card's click event
-    // ... existing code for the favorite button ...
+    event.stopPropagation();
+    console.log("FavoriteButton Hit Detected");
   });
 
   return container.appendChild(cardTemplate);
@@ -184,7 +192,6 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
   fetch("/favorites")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       data.forEach((user) => addUserCardFavorite(user));
       return;
     })
@@ -218,6 +225,10 @@ document.querySelector(".login-button").addEventListener("click", () => {
     .catch((error) => console.error(error));
 });
 
+// document.querySelector(".favorite-button").addEventListener("click", () => {
+//   console.log("Hi!");
+// });
+
 document.querySelector("#logout-button").addEventListener("click", () => {
   fetch("/logout")
     .then((response) => {
@@ -240,7 +251,6 @@ document
       .then((response) => response.json())
       .then((data) => {
         let ourStuff = data[0].streamers;
-        console.log(ourStuff);
         ourStuff.forEach((hotdog) => addUserCard(hotdog));
         // data.forEach((streamer) => addUserCard(streamer));
         return;
