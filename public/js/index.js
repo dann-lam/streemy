@@ -1,6 +1,5 @@
 let popupWindow = null;
 
-
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
@@ -18,7 +17,6 @@ function addUserCard(user) {
 
   platformElement.textContent = user.platform.platform_name;
 
- 
   cardLink.target = "_blank";
   cardLink.style.textDecoration = "none"; // Remove the underline from the text
 
@@ -37,8 +35,8 @@ function addUserCard(user) {
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
 
-   // Event listener for the card
-   card.addEventListener("click", (event) => {
+  // Event listener for the card
+  card.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default event (navigation)
     openStreamer(user.streamer_url);
   });
@@ -207,6 +205,19 @@ document
       .catch((error) => console.error(error));
   });
 
+document.querySelector(".login-button").addEventListener("click", () => {
+  fetch("/login")
+    .then((response) => {
+      if (response.ok) {
+        // Redirect user to login page, or show a "logged out" message, etc.
+        window.location.href = "/login";
+      } else {
+        console.error("Login failed");
+      }
+    })
+    .catch((error) => console.error(error));
+});
+
 document.querySelector("#logout-button").addEventListener("click", () => {
   fetch("/logout")
     .then((response) => {
@@ -243,20 +254,22 @@ document
     //   ;
   });
 
-  function openStreamer(streamerUrl) {
-    if(popupWindow && !popupWindow.closed) {
-      popupWindow.location.href = streamerUrl;
-    } else {
-      popupWindow = window.open(streamerUrl, 'streamerWindow', 'height=600,width=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no');
-    }
-  
-    if(window.focus) {
-      popupWindow.focus();
-    }
+function openStreamer(streamerUrl) {
+  if (popupWindow && !popupWindow.closed) {
+    popupWindow.location.href = streamerUrl;
+  } else {
+    popupWindow = window.open(
+      streamerUrl,
+      "streamerWindow",
+      "height=600,width=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no"
+    );
   }
-  
-  
-  card.addEventListener("click", () => {
-    openStreamer(user.streamer_url);
-  });
-  
+
+  if (window.focus) {
+    popupWindow.focus();
+  }
+}
+
+card.addEventListener("click", () => {
+  openStreamer(user.streamer_url);
+});

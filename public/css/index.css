@@ -93,8 +93,8 @@ header {
   text-transform: uppercase;
   color: white;
   position: absolute;
-  top: 10px;  
-  right: 10px;  
+  top: 10px;
+  right: 10px;
 }
 
 .card .card-streaming {
@@ -177,13 +177,32 @@ a {
   color: black;
 }
 
+.login-button {
+  box-shadow: 0px 0px 20px #32CD32;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.login-button:hover {
+  color: #000;
+  background-color: #fff;
+}
 
 .logout-button {
   box-shadow: 0px 0px 20px #32CD32;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 50px;
   font-size: 1em;
   font-weight: bold;
   padding: 5px 10px;
@@ -248,9 +267,9 @@ a {
 
 
 .favorite-button {
-  background: transparent; 
-  border: none; 
-  color: gold; 
+  background: transparent;
+  border: none;
+  color: gold;
 }
 
 
@@ -353,4 +372,3 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #4b367c;
 }
-
