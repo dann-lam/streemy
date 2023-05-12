@@ -21,8 +21,7 @@ DB can be seeded with npm run seed.
 ## Usage
 This application is simple to use! Simply login to Streemy and start adding your favorite streamers. The interface allows you to see the online/offline status of your streamers and navigate directly to their streams.
 
-
-USABLE LOGIN NAMES:
+Sample Login Names:
 -----------------------
 user1@example.com : password123
 
@@ -30,7 +29,7 @@ user2@example.com : password123
 
 user#@example.com : password123
 
-#'s go up until 6.
+#'s go up to 6.
 
 
 ## Features
