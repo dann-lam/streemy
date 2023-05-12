@@ -9,35 +9,16 @@ Contributing
 ## Usage
 This application is simple to use! Simply login to Streemy and start adding your favorite streamers. The interface allows you to see the online/offline status of your streamers and navigate directly to their streams.
 
+
 USABLE LOGIN NAMES:
+-----------------------
+user1@example.com : password123
 
-user1@example.com
+user2@example.com : password123
 
-user2@example.com
+user#@example.com : password123
 
-user# where # goes until 6.
-
-password: password123
-
-
-FrontEnd
-HTML
-CSS
-Javascript
-Fetch
-Web API
-Excalidraw
-Session Storage
-
-BackEnd
-Node
-NPM
-Bcrypt
-Express
-MySQL
-Sequelize ORM  
-User Authentication - express sessions
-
+#'s go up until 6.
 
 
 ## Features
