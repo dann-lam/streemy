@@ -94,7 +94,7 @@ function addUserCardFavorite(user) {
   favoriteButton.classList.add("favorites-icon");
 
   cardTemplate.appendChild(card);
-  card.appendChild(cardLink); // Wrap the card content inside the anchor element
+  card.appendChild(cardLink); 
   cardLink.appendChild(cardInfo);
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
