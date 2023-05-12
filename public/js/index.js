@@ -1,6 +1,94 @@
-var currTab;
-let popupWindow = null;
+//global variable representing the interest area of a user defaulting to "online"
+var currTab = "online";
 
+let popupWindow = null;
+//Function dedicated to resetting content in a container.
+function clearStreamersContainer() {
+  const streamersContainer = document.querySelector(".streamers-container");
+  while (streamersContainer.firstChild) {
+    streamersContainer.removeChild(streamersContainer.firstChild);
+  }
+}
+//Switch function dedicated to figuring out which tab the user is on.
+let onFavOff = (string) => {
+  if (string === "offline") {
+    clearStreamersContainer();
+    return offlineFunc();
+  } else if (string === "online") {
+    clearStreamersContainer();
+    return onlineFunc();
+  } else if (string === "favorites") {
+    clearStreamersContainer();
+    return favoriteFunc();
+  }
+  console.log("you fed me wrong");
+  return;
+};
+//Routing for the "offline" route,.
+let offlineFunc = () => {
+  fetch("/offline")
+    .then((response) => response.json())
+    .then((data) => {
+      let ourStuff = data[0].streamers;
+      ourStuff.forEach((user) => addUserCard(user));
+      return;
+    })
+    .catch((error) => console.error(error));
+};
+
+//Routing for updating which users are favorited on the backend.
+let patchFav = (inNum, inString) => {
+  fetch("/favNum", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      data: inNum,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => onFavOff(inString))
+    .catch((error) => console.error(error));
+};
+//Routing for loging in.
+let loginFunc = () => {
+  fetch("/login")
+    .then((response) => {
+      if (response.ok) {
+        // Redirect user to login page, or show a "logged out" message, etc.
+        window.location.href = "/login";
+      } else {
+        console.error("Login failed");
+      }
+    })
+    .catch((error) => console.error(error));
+};
+//Routing for retrieving our favorited streamers.
+let favoriteFunc = () => {
+  fetch("/favorites")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((user) => addUserCardFavorite(user));
+      return;
+    })
+    .catch((error) => console.error(error));
+};
+//Routing for retrieving which streamers are online.
+let onlineFunc = () => {
+  fetch("/online")
+    //
+    .then((response) => response.json())
+    .then((data) => {
+      let ourStuff = data[0].streamers;
+      ourStuff.forEach((hotdog) => addUserCard(hotdog));
+      // data.forEach((streamer) => addUserCard(streamer));
+      return;
+      //Promise not resolved.
+    })
+    .catch((error) => console.error(error));
+};
+//Function for Creating a card for "Online" and "Offline" routes.
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
@@ -42,7 +130,7 @@ function addUserCard(user) {
   cardInfo.appendChild(favoriteButton);
 
   // Event listener for the card
-  card.addEventListener("click", (event) => {
+  nameElement.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default event (navigation)
     openStreamer(user.streamer_url);
   });
@@ -50,12 +138,14 @@ function addUserCard(user) {
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    console.log("Favorite Button hit detected");
-    console.log("CurrTab is ", currTab);
+    let num = cardLink.dataset.streamerId;
+    patchFav(num, currTab);
   });
 
   return container.appendChild(cardTemplate);
 }
+
+//Unfortunate repeat, but the nature of the routing kinda forces me to change up a few variables. Could 100% be dryer, but I don't have time to fix it.
 
 function addUserCardFavorite(user) {
   const container = document.querySelector(".streamers-container");
@@ -66,6 +156,7 @@ function addUserCardFavorite(user) {
   const cardInfo = document.createElement("div");
   const cardTemplate = document.createElement("div");
   const cardLink = document.createElement("a"); // Create anchor element
+
   //ATTRIBUTES FOR FAVORITES
   let streamerId = user.streamerId;
   cardLink.dataset.streamerId = streamerId;
@@ -101,72 +192,20 @@ function addUserCardFavorite(user) {
   cardInfo.appendChild(favoriteButton);
 
   // Event listener for the card
-  card.addEventListener("click", (event) => {
+  nameElement.addEventListener("click", (event) => {
     event.preventDefault(); // Prevent the default event (navigation)
     openStreamer(streamerURL);
   });
 
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
+    event.preventDefault();
     event.stopPropagation();
-    console.log("currTab is ", currTab);
+    let num = cardLink.dataset.streamerId;
+    patchFav(num, currTab);
   });
 
   return container.appendChild(cardTemplate);
-}
-
-// function addUserCard(user) {
-//   //Select this card, and then CLONE IT.
-//   console.log(user);
-//   const cardTemplate = document.querySelector(".card-template");
-//   const card = cardTemplate.cloneNode(true);
-
-//   // Populate card with user data
-//   card.querySelector(".card-avatar").src = user.avatarUrl;
-//   card.querySelector(".card-username").textContent = user.username;
-//   card.querySelector(".card-streaming").textContent = user.streaming;
-//   card.querySelector(".card-name").textContent = user.name; // Add the streamer's name
-
-//   card.classList.remove("card-template");
-//   card.classList.add(user.status);
-//   card.classList.add(`platform-${user.platform.toLowerCase()}`);
-
-//   const favoriteButton = document.createElement("button");
-//   favoriteButton.classList.add("favorite-button");
-//   favoriteButton.innerHTML = user.isFavorited ? "★" : "☆";
-
-//   // Event listener for liking/unliking a user
-//   //How does isFavorited method work
-//   favoriteButton.addEventListener("click", (event) => {
-//     event.stopPropagation(); // Prevent the card's click event
-//     const isFavorited = favoriteButton.innerHTML === "★";
-//     fetch(`/favorites/${user.id}`, { method: isFavorited ? "DELETE" : "POST" })
-//       .then((response) => {
-//         if (response.ok) {
-//           favoriteButton.innerHTML = isFavorited ? "☆" : "★";
-//         }
-//       })
-//       .catch((error) => console.error(error));
-//   });
-
-//   // Append favorite button to the card
-//   card.querySelector(".card-info").appendChild(favoriteButton);
-
-//   // Append card to the container
-//   const streamersContainer = document.querySelector(".streamers-container");
-//   streamersContainer.appendChild(card);
-
-//   // Event listener for card click
-//   card.addEventListener("click", () => {
-//     window.location.href = user.streamer_url; // Open the streamer's URL when the card is clicked
-//   });
-// }
-
-function clearStreamersContainer() {
-  const streamersContainer = document.querySelector(".streamers-container");
-  while (streamersContainer.firstChild) {
-    streamersContainer.removeChild(streamersContainer.firstChild);
-  }
 }
 
 const statusButtons = document.querySelectorAll(
@@ -194,13 +233,7 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
   // Fetch data for the favorite streamers and populate the cards
   clearStreamersContainer();
   currTab = "favorites";
-  fetch("/favorites")
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((user) => addUserCardFavorite(user));
-      return;
-    })
-    .catch((error) => console.error(error));
+  favoriteFunc();
 });
 
 document
@@ -208,32 +241,12 @@ document
   .addEventListener("click", () => {
     clearStreamersContainer();
     currTab = "offline";
-    fetch("/offline")
-      .then((response) => response.json())
-      .then((data) => {
-        let ourStuff = data[0].streamers;
-        ourStuff.forEach((user) => addUserCard(user));
-        return;
-      })
-      .catch((error) => console.error(error));
+    offlineFunc();
   });
 
 document.querySelector(".login-button").addEventListener("click", () => {
-  fetch("/login")
-    .then((response) => {
-      if (response.ok) {
-        // Redirect user to login page, or show a "logged out" message, etc.
-        window.location.href = "/login";
-      } else {
-        console.error("Login failed");
-      }
-    })
-    .catch((error) => console.error(error));
+  loginFunc();
 });
-
-// document.querySelector(".favorite-button").addEventListener("click", () => {
-//   console.log("Hi!");
-// });
 
 document.querySelector("#logout-button").addEventListener("click", () => {
   fetch("/logout")
@@ -253,17 +266,7 @@ document
   .addEventListener("click", () => {
     clearStreamersContainer();
     currTab = "online";
-    fetch("/online")
-      //
-      .then((response) => response.json())
-      .then((data) => {
-        let ourStuff = data[0].streamers;
-        ourStuff.forEach((hotdog) => addUserCard(hotdog));
-        // data.forEach((streamer) => addUserCard(streamer));
-        return;
-        //Promise not resolved.
-      })
-      .catch((error) => console.error(error));
+    onlineFunc();
     //   .catch((error) => console.error(error));
     //   .then((data) => {
     //     data.forEach((user) => addUserCard(user));
@@ -287,6 +290,6 @@ function openStreamer(streamerUrl) {
   }
 }
 
-card.addEventListener("click", () => {
-  openStreamer(user.streamer_url);
-});
+// card.addEventListener("click", () => {
+//   openStreamer(user.streamer_url);
+// });

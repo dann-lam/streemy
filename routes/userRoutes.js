@@ -8,25 +8,23 @@ const { Sequelize } = require("sequelize");
 //THIS route never gets hit???
 router.get("/", async (req, res) => {
   try {
-    console.log("This should be working.");
     if (!req.session.logged_in) {
       res.redirect("/login");
     } else {
-      console.log("lol");
       return res.sendFile(path.join(__dirname, "../public/login.html"));
     }
-  } catch (err) {
-    console.log("Err lol");
-  }
+  } catch (err) {}
 });
 
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
+<<<<<<< HEAD
     console.log("They're not signed in");
+=======
+>>>>>>> 606358513eb0096ecb36275a146bf0f49dc76d7d
     return res.sendFile(path.join(__dirname, "../public/login.html"));
   } else {
-    console.log("They're signed in2.");
     res.redirect("/login");
   }
 });
@@ -50,7 +48,6 @@ router.post("/signup", async (req, res) => {
         req.session.user_id = newUser.id;
         req.session.logged_in = true;
 
-        console.log(req.session.user_id);
         res.status(200).json({ message: "Logged in successfully" });
       });
     } else {
@@ -86,7 +83,6 @@ router.post("/login", async (req, res) => {
       res.status(200).json({ message: "Logged in successfully" });
     });
   } catch (err) {
-    console.log("login post 400");
     res.status(400).json(err);
   }
 });
@@ -120,7 +116,7 @@ router.get("/logout", (req, res) => {
 router.get("/online", async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
-    console.log("Our UserID!: ", ourUserID);
+
     const streamerData = await User.findAll({
       where: {
         id: ourUserID,
@@ -143,7 +139,6 @@ router.get("/online", async (req, res) => {
     if (!streamerData) {
       console.log("No streamer data found!");
     }
-    console.log(streamerData);
 
     // const streamers = streamerData.map((userStreamer) => {
     //   const streamer = userStreamer.Streamer.get({ plain: true });
@@ -188,7 +183,7 @@ router.get("/favorites", async (req, res) => {
 router.get("/offline", async (req, res) => {
   try {
     let ourUserID = req.session.user_id;
-    console.log("Our UserID!: ", ourUserID);
+
     const streamerData = await User.findAll({
       where: {
         id: ourUserID,
@@ -211,16 +206,15 @@ router.get("/offline", async (req, res) => {
     if (!streamerData) {
       console.log("No streamer data found!");
     }
-    console.log(streamerData);
     res.status(200).json(streamerData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/favNum", async (req, res) => {
   try {
-    let ourTargID = req.params.id;
+    let ourTargID = req.body.data;
     let ourUserID = req.session.user_id;
 
     const updateData = await User_Streamer.update(
