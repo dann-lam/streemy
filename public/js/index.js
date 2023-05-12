@@ -1,3 +1,4 @@
+var currTab;
 let popupWindow = null;
 
 function addUserCard(user) {
@@ -50,6 +51,7 @@ function addUserCard(user) {
   favoriteButton.addEventListener("click", (event) => {
     event.stopPropagation();
     console.log("Favorite Button hit detected");
+    console.log("CurrTab is ", currTab);
   });
 
   return container.appendChild(cardTemplate);
@@ -107,7 +109,7 @@ function addUserCardFavorite(user) {
   // Event listener for the favorite button
   favoriteButton.addEventListener("click", (event) => {
     event.stopPropagation();
-    console.log("FavoriteButton Hit Detected");
+    console.log("currTab is ", currTab);
   });
 
   return container.appendChild(cardTemplate);
@@ -191,6 +193,7 @@ function onNewUser(newUser) {
 document.querySelector(".favorites-button").addEventListener("click", () => {
   // Fetch data for the favorite streamers and populate the cards
   clearStreamersContainer();
+  currTab = "favorites";
   fetch("/favorites")
     .then((response) => response.json())
     .then((data) => {
@@ -204,6 +207,7 @@ document
   .querySelector(".status-button.offline")
   .addEventListener("click", () => {
     clearStreamersContainer();
+    currTab = "offline";
     fetch("/offline")
       .then((response) => response.json())
       .then((data) => {
@@ -248,6 +252,7 @@ document
   .querySelector(".status-button.online")
   .addEventListener("click", () => {
     clearStreamersContainer();
+    currTab = "online";
     fetch("/online")
       //
       .then((response) => response.json())
