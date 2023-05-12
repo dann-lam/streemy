@@ -1,3 +1,6 @@
+let popupWindow = null;
+
+
 function addUserCard(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
@@ -15,7 +18,7 @@ function addUserCard(user) {
 
   platformElement.textContent = user.platform.platform_name;
 
-  cardLink.href = user.streamer_url; // Set the anchor's href attribute
+ 
   cardLink.target = "_blank";
   cardLink.style.textDecoration = "none"; // Remove the underline from the text
 
@@ -33,6 +36,18 @@ function addUserCard(user) {
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
+
+   // Event listener for the card
+   card.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the default event (navigation)
+    openStreamer(user.streamer_url);
+  });
+
+  // Event listener for the favorite button
+  favoriteButton.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent the card's click event
+    // ... existing code for the favorite button ...
+  });
 
   return container.appendChild(cardTemplate);
 }
@@ -74,6 +89,18 @@ function addUserCardFavorite(user) {
   cardInfo.appendChild(nameElement);
   cardInfo.appendChild(platformElement);
   cardInfo.appendChild(favoriteButton);
+
+  // Event listener for the card
+  card.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent the default event (navigation)
+    openStreamer(streamerURL);
+  });
+
+  // Event listener for the favorite button
+  favoriteButton.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent the card's click event
+    // ... existing code for the favorite button ...
+  });
 
   return container.appendChild(cardTemplate);
 }
@@ -215,3 +242,21 @@ document
     //   })
     //   ;
   });
+
+  function openStreamer(streamerUrl) {
+    if(popupWindow && !popupWindow.closed) {
+      popupWindow.location.href = streamerUrl;
+    } else {
+      popupWindow = window.open(streamerUrl, 'streamerWindow', 'height=600,width=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,directories=no,status=no');
+    }
+  
+    if(window.focus) {
+      popupWindow.focus();
+    }
+  }
+  
+  
+  card.addEventListener("click", () => {
+    openStreamer(user.streamer_url);
+  });
+  
