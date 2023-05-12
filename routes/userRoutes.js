@@ -5,6 +5,27 @@ const path = require("path");
 const withAuth = require("../utils/auth");
 const { Sequelize } = require("sequelize");
 
+router.get("/", withAuth, async (req, res) => {
+  try {
+    if (!req.session.logged_in) {
+      return res.sendFile(path.join(__dirname, "../public/login.html"));
+    } else {
+      res.redirect("/login.html");
+    }
+  } catch (err) {
+    console.log("Err lol");
+  }
+});
+
+router.get("/login", (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  if (!req.session.logged_in) {
+    return res.sendFile(path.join(__dirname, "../public/login.html"));
+  } else {
+    res.redirect("/index.html");
+  }
+});
+
 router.post("/signup", async (req, res) => {
   try {
     let passwordInput = req.body.password;
@@ -28,19 +49,11 @@ router.post("/signup", async (req, res) => {
         res.status(200).json({ message: "Logged in successfully" });
       });
     } else {
+      res.status(400).json({ message: "Email already exists." });
       // User with the same email already exists, handle the error here.
     }
   } catch (err) {
     res.status(400).json(err);
-  }
-});
-
-router.get("/login", (req, res) => {
-  // If a session exists, redirect the request to the homepage
-  if (!req.session.logged_in) {
-    return res.sendFile(path.join(__dirname, "../public/login.html"));
-  } else {
-    res.redirect("/index.html");
   }
 });
 
@@ -201,21 +214,9 @@ router.get("/offline", withAuth, async (req, res) => {
 });
 
 router.patch("/:id", withAuth, async (req, res) => {
-  // const getData = await User_Streamer.findOne(
-
-  //   {
-  //     where: {
-  //       user_id: ourUserID,
-  //       streamer_id: ourTargID,
-  //     },
-  //   }
-  // );
-
   try {
     let ourTargID = req.params.id;
     let ourUserID = req.session.user_id;
-    console.log("ourUserID", ourUserID);
-    console.log("ourTargID", ourTargID);
 
     const updateData = await User_Streamer.update(
       {
