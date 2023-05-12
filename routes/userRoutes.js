@@ -144,6 +144,8 @@ router.get("/online", async (req, res) => {
     //   };
     // });
     // res.json(streamers);
+    console.log("StreamerData");
+    console.log(streamerData);
     res.status(200).json(streamerData);
     //Give me our list.
   } catch (err) {
@@ -202,6 +204,8 @@ router.get("/offline", async (req, res) => {
     if (!streamerData) {
       console.log("No streamer data found!");
     }
+    console.log("StreamerData");
+    console.log(streamerData);
     res.status(200).json(streamerData);
   } catch (err) {
     res.status(500).json(err);
@@ -236,6 +240,8 @@ router.patch("/favNum", async (req, res) => {
     });
 
     //Query the thing again, and then send back our thing.
+    console.log("Bool Data");
+    console.log(boolData);
     res.status(200).json(boolData);
   } catch (err) {
     console.log("Hit our error!", err);
