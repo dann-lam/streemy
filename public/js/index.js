@@ -30,7 +30,7 @@ function addUserCard(user) {
   return container.appendChild(cardTemplate);
 }
 
-function addUserCardOffline(user) {
+function addUserCardFavorite(user) {
   const container = document.querySelector(".streamers-container");
   const card = document.createElement("div");
   const favoriteButton = document.createElement("button");
@@ -54,6 +54,7 @@ function addUserCardOffline(user) {
   card.classList.add(
     `platform-${user.streamer.platform.platform_name.toLowerCase()}`
   );
+  card.classList.add("favorite-card");
 
   cardTemplate.appendChild(card);
   card.appendChild(cardInfo);
@@ -165,7 +166,7 @@ document.querySelector(".favorites-button").addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      data.forEach((user) => addUserCardOffline(user));
+      data.forEach((user) => addUserCardFavorite(user));
       return;
     })
     .catch((error) => console.error(error));
