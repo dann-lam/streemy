@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "seed": "node seeds/index.js",
-    "heroku-postbuild": "npm rebuild bcrypt"
+    "heroku-prebuild": "npm install bcrypt",
+    "heroku-postbuild": "npm rebuild bcrypt --build-from-source"
   },
   "keywords": [],
   "author": "",
