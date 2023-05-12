@@ -19,10 +19,6 @@ router.get("/", async (req, res) => {
 router.get("/login", (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
-<<<<<<< HEAD
-    console.log("They're not signed in");
-=======
->>>>>>> 606358513eb0096ecb36275a146bf0f49dc76d7d
     return res.sendFile(path.join(__dirname, "../public/login.html"));
   } else {
     res.redirect("/login");
