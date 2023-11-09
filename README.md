@@ -31,7 +31,10 @@ DB can be seeded with npm run seed.
 ## Usage
 This application is simple to use! Simply login to Streemy and start adding your favorite streamers. The interface allows you to see the online/offline status of your streamers and navigate directly to their streams.
 
-![Image of Application](https://raw.githubusercontent.com/kylecoding1/Project2/main/togglefavorite.gif)
+
+
+https://github.com/dann-lam/streemy/assets/15963035/da8f8604-3aa9-4d5a-b7a3-517fc25b2526
+
 
 
 Sample Login Names:
